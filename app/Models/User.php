@@ -13,13 +13,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'user';
-
-    /**
      * The name of the "created at" column.
      *
      * @var string
