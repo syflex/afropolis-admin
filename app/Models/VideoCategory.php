@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Collections extends Model
+class VideoCategory extends Model
 {
     use HasFactory;
+
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'collection';
+    protected $table = 'video_category';
 
     /**
      * The name of the "created at" column.
@@ -36,20 +37,27 @@ class Collections extends Model
      * @var string[]
      */
     protected $fillable = [
-        'title',
-        'cover',
-        'description',
-        'userId',
+        'videoId',
+        'InterestId',
     ];
 
     /**
-     * Get the user that owns the Collections
+     * Get the user that owns the VideoCategory
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function video()
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(Videos::class, 'videoId');
     }
 
+    /**
+     * Get the user that owns the VideoCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function interest()
+    {
+        return $this->belongsTo(Interests::class, 'interestId');
+    }
 }

@@ -36,13 +36,13 @@ class Events extends Model
      * @var string[]
      */
     protected $fillable = [
+        'userId',
         'title',
         'slug',
         'about',
         'description',
         'isPublished',
         // 'isFeatured',
-        'userId',
     ];
 
 }

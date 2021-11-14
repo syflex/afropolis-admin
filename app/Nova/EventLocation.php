@@ -6,26 +6,24 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\File;
-use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\BelongsTo;
 
-class Videos extends Resource
+
+class EventLocation extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Videos::class;
+    public static $model = \App\Models\EventLocation::class;
 
-    /**
+     /**
      * The logical group associated with the resource.
      *
      * @var string
      */
-    public static $group = 'Video Rooms';
-
+    public static $group = 'Event';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -53,15 +51,10 @@ class Videos extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Title'), 'title')->sortable(),
-            Text::make(__('Year'), 'year')->sortable(),
-            File::make(__('Video'), 'videoLink')
-                ->disk('s3')
-                ->path('rooms/video'.$request->user()->id),
-            File::make(__('Cover'), 'cover')
-                ->disk('s3')
-                ->path('rooms/video'.$request->user()->id),
-            Textarea::make(__('Description'), 'description')->sortable(),
+            Text::make(__('Address'), 'address')->sortable(),
+            Text::make(__('Country'), 'country')->sortable(),
+            Text::make(__('City'), 'city')->sortable(),
+            BelongsTo::make(__('Event'), 'event', 'App\Nova\Events'),
         ];
     }
 

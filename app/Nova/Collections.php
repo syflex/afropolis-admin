@@ -7,6 +7,8 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Trix;
+use Laravel\Nova\Fields\BelongsTo;
 
 class Collections extends Resource
 {
@@ -56,6 +58,7 @@ class Collections extends Resource
             Text::make(__('Title'), 'title')->sortable(),
             Text::make(__('Cover'), 'cover')->sortable(),
             Textarea::make(__('Description'), 'description')->sortable(),
+            BelongsTo::make(__('Video Room'), 'user', 'App\Nova\User'),
         ];
     }
 

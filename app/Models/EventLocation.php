@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Collections extends Model
+class EventLocation extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Collections extends Model
      *
      * @var string
      */
-    protected $table = 'collection';
+    protected $table = 'location';
 
     /**
      * The name of the "created at" column.
@@ -36,20 +36,20 @@ class Collections extends Model
      * @var string[]
      */
     protected $fillable = [
-        'title',
-        'cover',
-        'description',
-        'userId',
+        'address',
+        'country',
+        'city',
+        'eventLocationId',
     ];
 
     /**
-     * Get the user that owns the Collections
+     * Get the user that owns the EventLocation
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function event()
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(Events::class, 'eventLocationId');
     }
-
 }
+
