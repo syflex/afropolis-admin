@@ -38,7 +38,6 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <?xml version="1.0" standalone="no"?>
                     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
                     "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -121,16 +120,14 @@
                 </div> --}}
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
+                    <div class="text-center text-lg text-gray-500 sm:text-left">
                         <div class="flex items-center">
                             <a href="{{ url('/nova') }}" class="ml-1 underline">
                                 login
                             </a>
                         </div>
                     </div>
-
-                    <br/>
-
+                    &nbsp;
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Afropolis v{{ "1.0.0" }}
                     </div>
