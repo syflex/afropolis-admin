@@ -6,13 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "arcanedev/log-viewer": "~8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
         "laravel/nova": "*",
+        "laravel/passport": "^10.2",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "league/flysystem-aws-s3-v3": "~1.0"
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "spatie/laravel-sluggable": "^2.6"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -54,7 +57,10 @@
             "php artisan config:clear",
             "chmod -R 777 storage",
             "php artisan storage:link",
-            "php artisan migrate"
+            "php artisan migrate",
+            "php artisan passport:install --force",
+            "php artisan log-viewer:clear",
+            "php artisan log-viewer:publish --force"
         ]
     },
     "extra": {
