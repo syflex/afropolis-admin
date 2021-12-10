@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('App\Http\Controllers\API')->group(function () {
 
     // Route::post('login', 'AuthController@login');
-    // Route::post('signup', 'AuthController@signup');
-    // Route::get('featured_category', 'CategoryController@featurd');
+    Route::post('signup', 'AuthController@signup');
+    Route::get('featured_category', 'CategoryController@featurd');
 
 
     // //password reset routes
@@ -43,7 +43,10 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
     //     Route::get('user/post', 'UsersController@post');
     //     Route::post('user/validate', 'UsersController@validate_password');
 
-    // });
+        // Route::resource('users', 'UsersController');
+        // Route::post('user/avatar', 'UsersController@avatar');
+        // Route::get('user/post', 'UsersController@post');
+        // Route::post('user/validate', 'UsersController@validate_password');
 
 
     // New implementation
