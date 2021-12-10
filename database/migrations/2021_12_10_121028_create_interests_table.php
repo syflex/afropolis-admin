@@ -19,6 +19,7 @@ class CreateInterestsTable extends Migration
             $table->text('description')->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('is_featured')->nullable()->default(false);
+            $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
         });
