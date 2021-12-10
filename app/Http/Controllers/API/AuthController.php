@@ -113,7 +113,8 @@ class AuthController extends Controller
                 'message' => 'Your account is under review'
             ], 401);
 
-        $user = User::where('id', Auth::user()->id)->first();
+        // $user = User::where('id', Auth::user()->id)->first();
+        $user = User::where('email', $request->get('email'))->first();
 
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
