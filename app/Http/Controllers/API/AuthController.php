@@ -12,6 +12,11 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
+
+      public function __construct()
+    {
+         $this->middleware('auth:api', ['except' => ['signIn','signUp']]);
+    }
     /**
      * Create user
      *
@@ -21,7 +26,7 @@ class AuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
-    public function signup(Request $request)
+    public function signUp(Request $request)
     {
 
         $messages = [
@@ -90,7 +95,7 @@ class AuthController extends Controller
      * @return [string] token_type
      * @return [string] expires_at
      */
-    public function login(Request $request)
+    public function signIn(Request $request)
     {
         $request->validate([
             'email' => 'required|string|email',
@@ -124,7 +129,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'login successful',
+            'message' => 'Login successfully',
             'access_token' => $tokenResult->accessToken,
         ]);
     }
@@ -147,15 +152,58 @@ class AuthController extends Controller
     /**
      * Get the authenticated User
      *
-     * @return [json] user object
+     * @return [json] user ob
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      */
     public function user(Request $request)
     {
-        $user = User::where('id', Auth::user()->id)->first();
+        $user =auth()->user()->id;
+
+        // $user = User::where('id', auth()->user()->id);
         return response()->json([
             'status' => 'success',
             'message' => 'user fetched',
-            'data' => $user
+            'user' => $user
         ]);
     }
 
