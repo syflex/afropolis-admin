@@ -12,11 +12,6 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
-
-      public function __construct()
-    {
-         $this->middleware('auth:api', ['except' => ['signIn','signUp']]);
-    }
     /**
      * Create user
      *
@@ -154,56 +149,28 @@ class AuthController extends Controller
      *
      * @return [json] user ob
      * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
      */
     public function user(Request $request)
     {
-        $user =auth()->user()->id;
-
-        // $user = User::where('id', auth()->user()->id);
+        $user = User::where('id', Auth::user()->id)->first();
         return response()->json([
             'status' => 'success',
             'message' => 'user fetched',
             'user' => $user
+        ]);
+    }
+
+
+    /** 
+     * Fetching all users
+     */
+    public function allUsers(Request $request)
+    {
+        $users = User::all();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'users fetched',
+            'users' => $users
         ]);
     }
 
