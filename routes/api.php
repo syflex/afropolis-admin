@@ -60,11 +60,19 @@ Route::group([ 'middleware' => 'auth:api','prefix'=> '/v1/accounts'], function (
 
     // events
 Route::group(['middleware' => 'auth:api','prefix'=> '/v1/events'], function () {
-        Route::post('/user', 'EventController@store');
+        Route::post('/create', 'EventController@store');
         Route::put('/{id}', 'EventController@update');
         Route::get('/', 'EventController@index');
         Route::get('/{id}', 'EventController@show');
         Route::delete('/{id}', 'EventController@destroy');
+    });
+    
+Route::group(['middleware' => 'auth:api','prefix'=> '/v1/posts'], function () {
+        Route::post('/', 'PostController@store');
+        Route::put('/{id}', 'PostController@update');
+        Route::get('/all', 'PostController@index');
+        Route::get('/{id}', 'PostController@show');
+        Route::delete('/{id}', 'PostController@destroy');
     });
 
 });

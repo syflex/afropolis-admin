@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 
 class EventController extends Controller
@@ -157,7 +160,7 @@ class EventController extends Controller
             $event->multiple = $request->input('multiple');
             $event->video = $request->input('video');
             $event->save();
-            return response()->json(['user' => $event, 'message' => 'Event created successfully', 'status' => true], 201);
+            return response()->json(['user' => $event, 'message' => 'Event updated successfully', 'status' => true], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Event creation Failed!', 'status' => false], 500);
         }
