@@ -173,5 +173,33 @@ class AuthController extends Controller
             'users' => $users
         ]);
     }
+    
+    public function editProfile(Request $request, $id)
+    {
+        $request->validate([
+            'profession' => 'string',
+            'website' => 'string',
+            "phone" =>  "string",
+            "username" =>  "string"
+        ]);
+
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->username = $request->input('username');
+            $user->phone = $request->input('phone');
+            $user->website = $request->input('website');
+            $user->save();
+            return response()->json(['user' => $user, 'message' => 'Profile updated successfully', 'status' => true], 201);
+    }
+    
+    public function getUser($id)
+    {
+    try {
+        $user = User::findOrFail($id);
+        return response()->json(['user' => $user], 200);
+        }       
+         catch(\Exception $e){
+            return response()->json(['message' => 'not found'], 404);  
+        }
+    }
 
 }
