@@ -18,8 +18,8 @@ class InterestController extends Controller
      */
     public function index()
     {
-        $Interests = Interest::all();
-        return response()->json(['Interests' => $Interests ]);
+        $interests = Interest::all();
+        return response()->json(['Interests' => $interests ]);
     }
 
     /**
@@ -42,19 +42,19 @@ class InterestController extends Controller
     {
          //
          $this->validate($request, [
-            'interest' => 'required|string'
+            'interest' => 'required|string|unique:interests'
         ]);
 
-        $user = Auth::user()->id;
+        // $user = Auth::user()->id;
 
         try {
             $interest = new Interest;
             $interest->interest = $request->input('interest');
-            $interest->user_id = $user;
+            // $interest->user_id = $user;
             $interest->save();
             return response()->json(['interest' => $interest, 'message' => 'Interest created successfully'], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'interest creation Failed!', 'status' => false], 500);
+            return response()->json(['error' => 'interest creation Failed!'.$e, 'status' => false], 500);
         }
     }
 
@@ -71,7 +71,7 @@ class InterestController extends Controller
          if($interest) return response()->json(['interest' => $interest], 200);
         }       
          catch(\Exception $e){
-            return response()->json(['error' => 'Something went wrong'], 500);  
+            return response()->json(['error' => 'not found'], 500);  
          }
     }
 
@@ -99,12 +99,9 @@ class InterestController extends Controller
             'interest' => 'required|string'
         ]);
 
-        $user = Auth::user()->id;
-
         try {
             $interest = Interest::findOrFail($id);
             $interest->interest = $request->input('interest');
-            $interest->user_id = $user;
             $interest->save();
             return response()->json(['interest' => $interest, 'message' => 'Interest created successfully'], 201);
         } catch (\Exception $e) {
@@ -130,7 +127,7 @@ class InterestController extends Controller
             }
         }
         catch(\Exception $e){
-            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+            return response()->json(['error' => 'not found went', 'status' => false], 500);
 
         }
     }
