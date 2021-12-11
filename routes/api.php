@@ -36,7 +36,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
-
+        Route::get('featured-users', 'AuthController@get_featured_users');
         // Route::resource('users', 'UsersController');
         // Route::post('user/avatar', 'UsersController@avatar');
         // Route::get('user/post', 'UsersController@post');
