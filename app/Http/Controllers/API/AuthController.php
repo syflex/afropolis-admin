@@ -174,7 +174,7 @@ class AuthController extends Controller
         ]);
     }
     
-    public function editProfile(Request $request, $id)
+    public function editProfile(Request $request)
     {
         $request->validate([
             'profession' => 'string',
