@@ -113,7 +113,8 @@ class AuthController extends Controller
                 'message' => 'Your account is under review'
             ], 401);
 
-        $user = User::where('id', Auth::user()->id)->first();
+        // $user = User::where('id', Auth::user()->id)->first();
+        $user = User::where('email', $request->get('email'))->first();
 
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
@@ -200,6 +201,22 @@ class AuthController extends Controller
          catch(\Exception $e){
             return response()->json(['message' => 'not found'], 404);  
         }
+    }
+    /**
+     * Update user details
+     *
+     * @param  [string] name
+     * @param  [string] email
+     * @return [string] message
+     */
+    public function get_featured_users(Request $request)
+    {
+        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->random(10);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'users fetched',
+            'data' => $users
+        ]);
     }
 
 }
