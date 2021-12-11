@@ -15,7 +15,7 @@ class Genres extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Genres::class;
+    public static $model = \App\Models\Genre::class;
 
     /**
      * The logical group associated with the resource.
@@ -53,7 +53,7 @@ class Genres extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Name'), 'name')->sortable(),
-            File::make(__('Cover'), 'cover'),
+            File::make(__('Image'), 'image'),
         ];
     }
 

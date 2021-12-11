@@ -17,7 +17,7 @@ class Collections extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Collections::class;
+    public static $model = \App\Models\Collection::class;
 
     /**
      * The logical group associated with the resource.
@@ -55,8 +55,8 @@ class Collections extends Resource
         // 'description',
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Title'), 'title')->sortable(),
-            Text::make(__('Cover'), 'cover')->sortable(),
+            Text::make(__('Name'), 'name')->sortable(),
+            Text::make(__('Image'), 'image')->sortable(),
             Textarea::make(__('Description'), 'description')->sortable(),
             BelongsTo::make(__('Video Room'), 'user', 'App\Nova\User'),
         ];

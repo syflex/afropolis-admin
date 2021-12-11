@@ -34,8 +34,18 @@ class VideoCategory extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function interest()
+    public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+     /**
+     * Get the user that owns the VideoCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function interest()
+    {
+        return $this->belongsTo(Interest::class);
     }
 }
