@@ -181,7 +181,7 @@ class AuthController extends Controller
             'profession' => 'string',
             'website' => 'string',
             "phone" =>  "string",
-            "name" =>  "string",
+            "name" =>  "required|string",
             "slug" =>  "string"
         ]);
 
@@ -236,19 +236,21 @@ class AuthController extends Controller
 
         $id = Auth::user()->id;
         $hashPassword = Auth::user()->password;
-        if(!Hash::check($request->password, $hashPassword)) {
-            return response()->json(['error' => 'Current Password is invalid', 'status' => false], 400);
+        echo ($hashPassword);
+        if(!Hash::check($request->currentPassword, $hashPassword)) {
+            return response()->json(['error' => 'Current Password is not correct', 'status' => false], 403);
         }
         if(Hash::check($request->newPassword, $hashPassword)) {
             return response()->json(['error' => 'Current Password cannot be the same with new password', 'status' => false], 400);
         }
          try {
             $user = User::findOrFail($id);
-            $user->password = $request->input('newPassword');
+            $user->password = bcrypt($request->input('newPassword'));
+
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Password changed successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+            return response()->json(['error' => 'Something went wrong!'.$e, 'status' => false], 500);
         }
 
     }

@@ -43,6 +43,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::get('user', 'AuthController@user');
                 Route::get('featured-users', 'AuthController@get_featured_users');
                 Route::put('/user/editProfile', 'AuthController@editProfile');
+                Route::put('/changePassword', 'AuthController@changePassword');
                 Route::get('/user/{id}', 'AuthController@getUser');
                 Route::get('/all', 'AuthController@allUsers');
                 Route::get('logout', 'AuthController@logout');
