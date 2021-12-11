@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VideoCategory extends Model
+class VideoInterest extends Model
 {
     use HasFactory;
 
@@ -36,6 +36,6 @@ class VideoCategory extends Model
      */
     public function interest()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Interest::class);
     }
 }

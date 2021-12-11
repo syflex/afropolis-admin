@@ -15,6 +15,6 @@ class Interest extends Model
      * @var string[]
      */
     protected $fillable = [
-        'interest',
+        'name','description','avatar','is_featured'
     ];
 }
