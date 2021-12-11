@@ -254,7 +254,22 @@ class AuthController extends Controller
         }
 
     }
-        // Update profile
+
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email',
+        ]);
+        $email = $request->input('email');
+        $user = User::where('email', '==', $email);
+
+        return response()->json(['user' => $user], 200);
+
+    }
+        
+    
+    // Update profile
     //     public function updateDetails(Request $request)
     //     { 
     //         $id = Auth::user()->id;
