@@ -21,7 +21,7 @@ class AuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
-    public function signup(Request $request)
+    public function signUp(Request $request)
     {
 
         $messages = [
@@ -90,7 +90,7 @@ class AuthController extends Controller
      * @return [string] token_type
      * @return [string] expires_at
      */
-    public function login(Request $request)
+    public function signIn(Request $request)
     {
         $request->validate([
             'email' => 'required|string|email',
@@ -125,7 +125,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'login successful',
+            'message' => 'Login successfully',
             'access_token' => $tokenResult->accessToken,
         ]);
     }
@@ -148,7 +148,8 @@ class AuthController extends Controller
     /**
      * Get the authenticated User
      *
-     * @return [json] user object
+     * @return [json] user ob
+     * 
      */
     public function user(Request $request)
     {
@@ -156,10 +157,51 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'user fetched',
-            'data' => $user
+            'user' => $user
         ]);
     }
 
+
+    /** 
+     * Fetching all users
+     */
+    public function allUsers(Request $request)
+    {
+        $users = User::all();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'users fetched',
+            'users' => $users
+        ]);
+    }
+    
+    public function editProfile(Request $request)
+    {
+        $request->validate([
+            'profession' => 'string',
+            'website' => 'string',
+            "phone" =>  "string",
+            "username" =>  "string"
+        ]);
+
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->username = $request->input('username');
+            $user->phone = $request->input('phone');
+            $user->website = $request->input('website');
+            $user->save();
+            return response()->json(['user' => $user, 'message' => 'Profile updated successfully', 'status' => true], 201);
+    }
+    
+    public function getUser($id)
+    {
+    try {
+        $user = User::findOrFail($id);
+        return response()->json(['user' => $user], 200);
+        }       
+         catch(\Exception $e){
+            return response()->json(['message' => 'not found'], 404);  
+        }
+    }
     /**
      * Update user details
      *
