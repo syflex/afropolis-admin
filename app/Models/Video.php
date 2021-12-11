@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Interest extends Model
+class Video extends Model
 {
     use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
     protected $fillable = [
-        'name','description','avatar','is_featured'
+        'title',
+        'year',
+        'cover',
+        'video_url',
+        'description',
     ];
 
-    
 }

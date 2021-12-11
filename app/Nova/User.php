@@ -38,7 +38,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email', 'username', 'phone','isActive',
+        'id', 'name', 'email', 'phone',
     ];
 
     /**
@@ -69,20 +69,12 @@ class User extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 
-            Text::make(__('Username'), 'username')
-                ->sortable()
-                ->rules('max:255')
-                ->creationRules('unique:user,username')
-                ->updateRules('unique:user,username,{{resourceId}}'),
-
             Text::make(__('Phone'), 'phone')
                 ->sortable()
                 ->rules('max:255'),
 
-            Text::make(__('isActive'), 'isActive')
+            Text::make(__('Active'), 'active')
                 ->sortable(),
-
-            DateTime::make(__('Created At'), 'createdAt'),
         ];
     }
 

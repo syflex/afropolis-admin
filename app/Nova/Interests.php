@@ -14,7 +14,7 @@ class Interests extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Interests::class;
+    public static $model = \App\Models\Interest::class;
 
     /**
      * The logical group associated with the resource.
@@ -49,7 +49,7 @@ class Interests extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('interest')
+            Text::make('name')
             ->sortable()
             ->rules('required', 'max:255'),
         ];

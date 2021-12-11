@@ -10,6 +10,7 @@ class Post extends Model
     use HasFactory;
 
     /**
+<<<<<<< HEAD
      * The table associated with the model.
      *
      * @var string
@@ -31,6 +32,8 @@ class Post extends Model
     const UPDATED_AT = 'updated_at';
 
     /**
+=======
+>>>>>>> dbc256aa08e4cdbf88a45dffd0e2386e93cea2ab
      * The attributes that are mass assignable.
      *
      * @var string[]

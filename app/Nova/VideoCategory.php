@@ -52,6 +52,7 @@ class VideoCategory extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('Video'), 'video', 'App\Nova\Videos'),
             BelongsTo::make(__('Interest'), 'interest', 'App\Nova\Interests'),
+            BelongsTo::make(__('Catgeory'), 'category', 'App\Nova\Category'),
         ];
     }
 

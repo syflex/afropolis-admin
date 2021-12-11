@@ -16,7 +16,7 @@ class Follows extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Follows::class;
+    public static $model = \App\Models\Follow::class;
 
     /**
      * The logical group associated with the resource.

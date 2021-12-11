@@ -53,9 +53,9 @@ class Post extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Title'), 'title'),
-            File::make(__('Video'), 'video')
-            ->disk('s3')
-            ->path('rooms/video'.$request->user()->id),
+            // File::make(__('Video'), 'video_url')
+            // ->disk('s3')
+            // ->path('rooms/video'.$request->user()->id),
             // File::make(__('Cover'), 'cover')->disk('video'),
             BelongsTo::make('Users', 'UserPost', 'App\Nova\User'),
             Textarea::make(__('Description'), 'description'),

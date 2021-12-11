@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Interest extends Model
+class Genre extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,7 @@ class Interest extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name','description','avatar','is_featured'
+        'name',
+        'image'
     ];
-
-    
 }

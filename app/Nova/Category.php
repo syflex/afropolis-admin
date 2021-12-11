@@ -4,26 +4,16 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\File;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Videos extends Resource
+class Category extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Video::class;
-
-    /**
-     * The logical group associated with the resource.
-     *
-     * @var string
-     */
-    public static $group = 'Video Rooms';
-
+    public static $model = \App\Models\Category::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -51,15 +41,6 @@ class Videos extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Title'), 'title')->sortable(),
-            Text::make(__('Year'), 'year')->sortable(),
-            File::make(__('Video'), 'video_url')
-                ->disk('s3')
-                ->path('rooms/video'.$request->user()->id),
-            File::make(__('Cover'), 'image_url')
-                ->disk('s3')
-                ->path('rooms/video'.$request->user()->id),
-            Textarea::make(__('Description'), 'description')->sortable(),
         ];
     }
 

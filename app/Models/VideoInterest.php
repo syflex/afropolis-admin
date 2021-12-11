@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VideoCategory extends Model
+class VideoInterest extends Model
 {
     use HasFactory;
 
@@ -30,16 +30,6 @@ class VideoCategory extends Model
     }
 
     /**
-     * Get the user that owns the VideoCategory
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-     /**
      * Get the user that owns the VideoCategory
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
