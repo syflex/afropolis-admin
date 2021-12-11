@@ -41,7 +41,5 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
         // Route::post('user/avatar', 'UsersController@avatar');
         // Route::get('user/post', 'UsersController@post');
         // Route::post('user/validate', 'UsersController@validate_password');
-
-
     });
 });
