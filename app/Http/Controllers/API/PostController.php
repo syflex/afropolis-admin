@@ -42,7 +42,7 @@ class PostController extends Controller
     {
           $this->validate($request, [
             'title' => 'string',
-            'description' => 'string|',
+            'description' => 'stringsss',
             'video' => 'required|string',
         ]);
 
@@ -57,7 +57,7 @@ class PostController extends Controller
             $post->save();
             return response()->json(['post' => $post, 'message' => 'Post created successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Post creation Failed!', 'status' => false], 500);
+            return response()->json(['error' => 'Post creation Failed!'.$e, 'status' => false], 500);
         }
     }
 
@@ -71,7 +71,7 @@ class PostController extends Controller
     {
         try {
         $post = Post::findOrFail($id);
-        if($post) return response()->json(['event' => $post], 200);
+        if($post) return response()->json(['post' => $post], 200);
         }       
          catch(\Exception $e){
             return response()->json(['error' => 'Something went wrong', 'status' => true], 500);  

@@ -15,6 +15,9 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('interest_id')->nullable();
             $table->string('title');
             $table->longText('description');
             $table->longText('about');
@@ -30,7 +33,6 @@ class CreateEventsTable extends Migration
             $table->string('session');
             $table->jsonb('multiple')->nullable();
             $table->string('video');
-            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

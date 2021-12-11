@@ -14,21 +14,21 @@ class Post extends Model
      *
      * @var string
      */
-    protected $table = 'post';
+    protected $table = 'posts';
 
     /**
      * The name of the "created at" column.
      *
      * @var string
      */
-    const CREATED_AT = 'createdAt';
+    const CREATED_AT = 'created_at';
 
     /**
      * The name of the "updated at" column.
      *
      * @var string
      */
-    const UPDATED_AT = 'updatedAt';
+    const UPDATED_AT = 'updated_at';
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +38,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'video',
-        'userId',
+        'user_id',
         'description',
     ];
 
@@ -49,7 +49,7 @@ class Post extends Model
      */
     public function UserPost()
     {
-        return $this->belongsTo(User::class, 'userId', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 }

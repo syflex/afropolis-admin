@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Event;
+use App\Models\Events;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -20,7 +20,7 @@ class EventController extends Controller
     public function index()
     {
         //
-       $events = Event::all();
+       $events = Events::all();
         return response()->json(['events' => $events ]);
     }
 
@@ -64,7 +64,7 @@ class EventController extends Controller
             $user = Auth::user()->id;
 
         try {
-            $event = new Event;
+            $event = new Events;
             $event->title = $request->input('title');
             $event->about = $request->input('about');
             $event->description = $request->input('description');
@@ -97,7 +97,7 @@ class EventController extends Controller
     public function show($id)
     {
         try {
-        $event = Event::findOrFail($id);
+        $event = Events::findOrFail($id);
         if($event) return response()->json(['event' => $event], 200);
         }       
          catch(\Exception $e){
@@ -143,7 +143,7 @@ class EventController extends Controller
             'video' => 'required|string',
         ]);
         try {
-            $event = Event::findOrFail($id);
+            $event = Events::findOrFail($id);
             $event->title = $request->input('title');
             $event->about = $request->input('about');
             $event->description = $request->input('description');
@@ -175,7 +175,7 @@ class EventController extends Controller
     public function destroy($id)
     {
         try{
-            $event = Event::findOrFail($id);
+            $event = Events::findOrFail($id);
             $event->delete();
             if($car){                
                 return response()->json(['message'=> 'Event deleted successfully'], 200);  
