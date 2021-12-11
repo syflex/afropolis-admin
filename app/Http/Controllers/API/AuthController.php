@@ -262,9 +262,12 @@ class AuthController extends Controller
             'email' => 'required|string|email',
         ]);
         $email = $request->input('email');
-        $user = User::where('email', '==', $email);
-
+        $user = User::where('email', $email)->get();
+        if($user) {
         return response()->json(['user' => $user], 200);
+        }
+
+        return response()->json(['error' => 'Not found'], 404);
 
     }
         
