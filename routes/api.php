@@ -41,5 +41,10 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
         // Route::post('user/avatar', 'UsersController@avatar');
         // Route::get('user/post', 'UsersController@post');
         // Route::post('user/validate', 'UsersController@validate_password');
+
+        Route::post('follow', 'FollowController@store');
+        Route::get('following/{user_id}', 'FollowController@followings');
+        Route::get('followers/{user_id}', 'FollowController@followers');
+        // Route::resource('like', 'LikeController');
     });
 });
