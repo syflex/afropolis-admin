@@ -219,4 +219,55 @@ class AuthController extends Controller
         ]);
     }
 
+
+    /** 
+     * change password
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'required|string',
+            'newPassword' => 'required|string',
+            'password_confirmation' => 'required|same:newPassword',
+        ]);
+
+        $id = Auth::user()->id;
+        $hashPassword = Auth::user()->password;
+        if(!Hash::check($request->password, $hashPassword)) {
+            return response()->json(['error' => 'Current Password is invalid', 'status' => false], 400);
+        }
+        if(Hash::check($request->newPassword, $hashPassword)) {
+            return response()->json(['error' => 'Current Password cannot be the same with new password', 'status' => false], 400);
+        }
+         try {
+            $user = User::findOrFail($id);
+            $user->password = $request->input('newPassword');
+            $user->save();
+            return response()->json(['user' => $user, 'message' => 'Password changed successfully', 'status' => true], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+        }
+
+    }
+        // Update profile
+        public function updateDetails(Request $request)
+        { 
+            $id = Auth::user()->id;
+            $this->validate($request, [
+            'username' => 'required|string|alpha|min:4',
+            'email' => 'required|max:191|email|unique:users,email,' .$id,
+        ]);
+            
+            $id = Auth::user()->id;
+            try {
+            $user = User::find($id);
+            $user->username = $request->input('username');
+            $user->email = $request->input('email');
+            $user->save();
+            return response()->json(['user' => $user, 'message' => 'Profile changed successfully', 'status' => true], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+    }
+    }
+
 }
