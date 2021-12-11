@@ -45,6 +45,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::put('/user/editProfile', 'AuthController@editProfile');
                 Route::get('/user/{id}', 'AuthController@getUser');
                 Route::get('/all', 'AuthController@allUsers');
+                Route::post('/avatar', 'AuthController@avatar');
                 Route::get('logout', 'AuthController@logout');
             });
 

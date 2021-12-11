@@ -149,7 +149,7 @@ class AuthController extends Controller
      * Get the authenticated User
      *
      * @return [json] user ob
-     * 
+     *
      */
     public function user(Request $request)
     {
@@ -162,7 +162,7 @@ class AuthController extends Controller
     }
 
 
-    /** 
+    /**
      * Fetching all users
      */
     public function allUsers(Request $request)
@@ -174,7 +174,7 @@ class AuthController extends Controller
             'users' => $users
         ]);
     }
-    
+
     public function editProfile(Request $request)
     {
         $request->validate([
@@ -191,15 +191,15 @@ class AuthController extends Controller
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Profile updated successfully', 'status' => true], 201);
     }
-    
+
     public function getUser($id)
     {
     try {
         $user = User::findOrFail($id);
         return response()->json(['user' => $user], 200);
-        }       
+        }
          catch(\Exception $e){
-            return response()->json(['message' => 'not found'], 404);  
+            return response()->json(['message' => 'not found'], 404);
         }
     }
     /**
@@ -216,6 +216,18 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'users fetched',
             'data' => $users
+        ]);
+    }
+
+    public function avatar(Request $request)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->avatar = $request->avatar;
+        $user->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'avatar updated successfully',
+            'user' => $user
         ]);
     }
 
