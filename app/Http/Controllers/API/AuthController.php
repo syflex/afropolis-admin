@@ -181,13 +181,16 @@ class AuthController extends Controller
             'profession' => 'string',
             'website' => 'string',
             "phone" =>  "string",
-            "username" =>  "string"
+            "name" =>  "string",
+            "slug" =>  "string"
         ]);
 
             $user = User::where('id', Auth::user()->id)->first();
-            $user->username = $request->input('username');
+            $user->slug = $request->input('slug');
+            $user->name = $request->input('name');
             $user->phone = $request->input('phone');
             $user->website = $request->input('website');
+            $user->profession = $request->input('profession');
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Profile updated successfully', 'status' => true], 201);
     }
@@ -250,24 +253,24 @@ class AuthController extends Controller
 
     }
         // Update profile
-        public function updateDetails(Request $request)
-        { 
-            $id = Auth::user()->id;
-            $this->validate($request, [
-            'username' => 'required|string|alpha|min:4',
-            'email' => 'required|max:191|email|unique:users,email,' .$id,
-        ]);
+    //     public function updateDetails(Request $request)
+    //     { 
+    //         $id = Auth::user()->id;
+    //         $this->validate($request, [
+    //         'name' => 'required|string|alpha|min:4',
+    //         'slug' => 'required|max:191|email|unique:users,email,' .$id,
+    //     ]);
             
-            $id = Auth::user()->id;
-            try {
-            $user = User::find($id);
-            $user->username = $request->input('username');
-            $user->email = $request->input('email');
-            $user->save();
-            return response()->json(['user' => $user, 'message' => 'Profile changed successfully', 'status' => true], 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
-    }
-    }
+    //         $id = Auth::user()->id;
+    //         try {
+    //         $user = User::find($id);
+    //         $user->username = $request->input('username');
+    //         $user->email = $request->input('email');
+    //         $user->save();
+    //         return response()->json(['user' => $user, 'message' => 'Profile changed successfully', 'status' => true], 201);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+    // }
+    // }
 
 }
