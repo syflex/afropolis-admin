@@ -59,41 +59,51 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
         Route::get('followers/{user_id}', 'FollowController@followers');
         // Route::resource('like', 'LikeController');
 
-    // New implementation
-Route::group(['prefix'=> '/v1/accounts'], function () {
-        Route::post('/signup', 'AuthController@signUp');
-        Route::post('/signin', 'AuthController@signIn');
-        Route::get('/user', 'AuthController@user');
-        Route::put('/user/editProfile', 'AuthController@editProfile');
-        Route::get('/user/{id}', 'AuthController@getUser');
-        Route::get('/all', 'AuthController@allUsers');
-        Route::post('/logout', 'AuthController@logout');
- });
+                // New implementation
+            Route::group(['prefix'=> '/v1/accounts'], function () {
+                    Route::post('/signup', 'AuthController@signUp');
+                    Route::post('/signin', 'AuthController@signIn');
+                    Route::get('/user', 'AuthController@user');
+                    Route::put('/user/editProfile', 'AuthController@editProfile');
+                    Route::get('/user/{id}', 'AuthController@getUser');
+                    Route::get('/all', 'AuthController@allUsers');
+                    Route::post('/logout', 'AuthController@logout');
+            });
 
-    // events
-Route::group(['prefix'=> '/v1/events'], function () {
-        Route::post('/create', 'EventController@store');
-        Route::put('/{id}', 'EventController@update');
-        Route::get('/', 'EventController@index');
-        Route::get('/{id}', 'EventController@show');
-        Route::delete('/{id}', 'EventController@destroy');
-});
+                // events
+            Route::group(['prefix'=> '/v1/events'], function () {
+                    Route::post('/create', 'EventController@store');
+                    Route::put('/{id}', 'EventController@update');
+                    Route::get('/', 'EventController@index');
+                    Route::get('/{id}', 'EventController@show');
+                    Route::delete('/{id}', 'EventController@destroy');
+            });
 
-Route::group(['prefix'=> '/v1/posts'], function () {
-        Route::post('/', 'PostController@store');
-        Route::put('/{id}', 'PostController@update');
-        Route::get('/all', 'PostController@index');
-        Route::get('/{id}', 'PostController@show');
-        Route::delete('/{id}', 'PostController@destroy');
-});
+            Route::group(['prefix'=> '/v1/posts'], function () {
+                    Route::post('/', 'PostController@store');
+                    Route::put('/{id}', 'PostController@update');
+                    Route::get('/all', 'PostController@index');
+                    Route::get('/{id}', 'PostController@show');
+                    Route::delete('/{id}', 'PostController@destroy');
+            });
 
- Route::group(['middleware' => 'auth:api', 'prefix' => '/v1/interests'], function () {
-        Route::post('/', 'InterestController@store');
-        Route::put('/{id}', 'InterestController@update');
-        Route::get('/all', 'InterestController@index');
-        Route::get('/{id}', 'InterestController@show');
-        Route::delete('/{id}', 'InterestController@destroy');
-});
+            Route::group(['middleware' => 'auth:api', 'prefix' => '/v1/interests'], function () {
+                    Route::post('/', 'InterestController@store');
+                    Route::put('/{id}', 'InterestController@update');
+                    Route::get('/all', 'InterestController@index');
+                    Route::get('/{id}', 'InterestController@show');
+                    Route::delete('/{id}', 'InterestController@destroy');
+            });
+
+            Route::group(['prefix' => '/v1/comment'], function () {
+                Route::resource('comment', 'CommentController');
+            });
+
+            Route::group(['prefix' => '/v1/comment'], function () {
+                Route::resource('like', 'LikeController');
+            });
+
+
 
     });
 });
