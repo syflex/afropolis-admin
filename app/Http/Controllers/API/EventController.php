@@ -44,7 +44,7 @@ class EventController extends Controller
     {
         //
          $this->validate($request, [
-            'title' => 'required|string|min:4',
+            'title' => 'required|string',
             'about' => 'required|string|',
             'description' => 'required|string|',
             'price' => 'string',
@@ -57,7 +57,7 @@ class EventController extends Controller
             'address' => 'required|string',
             'time' => 'required|string',
             'session' => 'required|string',
-            'multiple' => 'string',
+            // 'multiple' => 'string',
             'video' => 'required|string',
         ]);
 
@@ -78,13 +78,13 @@ class EventController extends Controller
             $event->address = $request->input('address');
             $event->time = $request->input('time');
             $event->session = $request->input('session');
-            $event->multiple = $request->input('multiple');
+            // $event->multiple = $request->input('multiple');
             $event->video = $request->input('video');
             $event->user_id = $user;
             $event->save();
-            return response()->json(['user' => $event, 'message' => 'Event created successfully', 'status' => true], 201);
+            return response()->json(['message' => 'Event created successfully', 'user' => $event,  'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Event creation Failed!', 'status' => false], 500);
+            return response()->json(['error' => 'Event creation Failed!'.$e, 'status' => false], 500);
         }
     }
 
@@ -139,7 +139,7 @@ class EventController extends Controller
             'address' => 'required|string',
             'time' => 'required|string',
             'session' => 'required|string',
-            'multiple' => 'string',
+            // 'multiple' => 'string',
             'video' => 'required|string',
         ]);
         try {
@@ -157,7 +157,7 @@ class EventController extends Controller
             $event->address = $request->input('address');
             $event->time = $request->input('time');
             $event->session = $request->input('session');
-            $event->multiple = $request->input('multiple');
+            // $event->multiple = $request->input('multiple');
             $event->video = $request->input('video');
             $event->save();
             return response()->json(['user' => $event, 'message' => 'Event updated successfully', 'status' => true], 201);

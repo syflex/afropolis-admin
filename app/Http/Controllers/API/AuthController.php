@@ -73,8 +73,8 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => 'successful',
-                'message' => 'User created successfully',
-                'access_token' => $tokenResult->accessToken,
+                'message' => 'Account created successfully',
+                'accessToken' => $tokenResult->accessToken,
             ]);
         }
     }
@@ -104,7 +104,7 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials))
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Unauthorized'
+                'message' => 'Email and/or Password is invalid'
             ], 401);
 
         if (!Auth::user()->active)
@@ -175,13 +175,16 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * user edit profile
+     */
     public function editProfile(Request $request)
     {
         $request->validate([
             'profession' => 'string',
             'website' => 'string',
             "phone" =>  "string",
-            "name" =>  "required|string",
+            'name' => 'required',
             "slug" =>  "string"
         ]);
 
@@ -214,7 +217,7 @@ class AuthController extends Controller
      */
     public function get_featured_users(Request $request)
     {
-        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->random(10);
+        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->get()->random(10);
         return response()->json([
             'status' => 'success',
             'message' => 'users fetched',
@@ -236,7 +239,7 @@ class AuthController extends Controller
 
         $id = Auth::user()->id;
         $hashPassword = Auth::user()->password;
-        echo ($hashPassword);
+        //echo ($hashPassword);
         if(!Hash::check($request->currentPassword, $hashPassword)) {
             return response()->json(['error' => 'Current Password is not correct', 'status' => false], 403);
         }

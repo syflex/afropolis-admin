@@ -47,7 +47,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::post('/forgotPassword', 'AuthController@forgotPassword');
                 Route::get('/user/{id}', 'AuthController@getUser');
                 Route::get('/all', 'AuthController@allUsers');
-                Route::post('/avatar', 'AuthController@avatar');
+                Route::put('/avatar', 'AuthController@avatar');
                 Route::get('logout', 'AuthController@logout');
             });
 
@@ -86,7 +86,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                     Route::delete('/{id}', 'InterestController@destroy');
             });
 
-            Route::group(['prefix' => '/comment'], function () {
+            Route::group(['prefix' => '/comments'], function () {
                 Route::resource('comment', 'CommentController');
             });
 
