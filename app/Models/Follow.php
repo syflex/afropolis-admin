@@ -15,17 +15,17 @@ class Follow extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(Follow::class);
     }
 
     public function followers()
     {
-        return $this->belongsTo(User::class, 'user_id')->orderBy('name');
+        return $this->belongsTo(Follow::class, 'user_id')->orderBy('name');
     }
 
     public function followings()
     {
-        return $this->belongsTo(User::class, 'follow_id')->orderBy('name');
+        return $this->belongsTo(Follow::class, 'follow_id')->orderBy('name');
     }
 
 }
