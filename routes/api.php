@@ -43,9 +43,11 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::get('user', 'AuthController@user');
                 Route::get('featured-users', 'AuthController@get_featured_users');
                 Route::put('/user/editProfile', 'AuthController@editProfile');
+                Route::put('/changePassword', 'AuthController@changePassword');
+                Route::post('/forgotPassword', 'AuthController@forgotPassword');
                 Route::get('/user/{id}', 'AuthController@getUser');
                 Route::get('/all', 'AuthController@allUsers');
-                Route::post('/avatar', 'AuthController@avatar');
+                Route::put('/avatar', 'AuthController@avatar');
                 Route::get('logout', 'AuthController@logout');
             });
 
@@ -65,6 +67,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                     Route::put('/{id}', 'EventController@update');
                     Route::get('/', 'EventController@index');
                     Route::get('/{id}', 'EventController@show');
+                    Route::get('/user/events', 'EventController@userEvents');
                     Route::delete('/{id}', 'EventController@destroy');
             });
 
@@ -79,12 +82,12 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             Route::group(['prefix' => '/interests'], function () {
                     Route::post('/', 'InterestController@store');
                     Route::put('/{id}', 'InterestController@update');
-                    Route::get('/all', 'InterestController@index');
+                    Route::get('/', 'InterestController@index');
                     Route::get('/{id}', 'InterestController@show');
                     Route::delete('/{id}', 'InterestController@destroy');
             });
 
-            Route::group(['prefix' => '/comment'], function () {
+            Route::group(['prefix' => '/comments'], function () {
                 Route::resource('comment', 'CommentController');
             });
 
@@ -92,6 +95,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::get('read/{id}', 'NotificationController@read');
                 Route::get('read/all', 'NotificationController@read_all');
                 Route::get('delete', 'NotificationController@delete');
+            });
+            
+            Route::group(['prefix' => '/collections'], function () {
+                Route::post('/', 'CollectionController@store');
+                Route::get('/', 'CollectionController@index');
+                Route::get('/{id}', 'CollectionController@show');
+                Route::delete('/{id}', 'CollectionController@destroy');
             });
 
         });
@@ -117,6 +127,5 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
     //     Route::post('user/avatar', 'UsersController@avatar');
     //     Route::get('user/post', 'UsersController@post');
     //     Route::post('user/validate', 'UsersController@validate_password');
-
 
 });

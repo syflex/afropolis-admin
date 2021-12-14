@@ -76,8 +76,8 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => 'successful',
-                'message' => 'User created successfully',
-                'access_token' => $tokenResult->accessToken,
+                'message' => 'Account created successfully',
+                'accessToken' => $tokenResult->accessToken,
             ]);
         }
     }
@@ -107,7 +107,7 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials))
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Unauthorized'
+                'message' => 'Email and/or Password is invalid'
             ], 401);
 
         if (!Auth::user()->active)
@@ -178,19 +178,25 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * user edit profile
+     */
     public function editProfile(Request $request)
     {
         $request->validate([
             'profession' => 'string',
             'website' => 'string',
             "phone" =>  "string",
-            "username" =>  "string"
+            'name' => 'required',
+            "slug" =>  "string"
         ]);
 
             $user = User::where('id', Auth::user()->id)->first();
-            $user->username = $request->input('username');
+            $user->slug = $request->input('slug');
+            $user->name = $request->input('name');
             $user->phone = $request->input('phone');
             $user->website = $request->input('website');
+            $user->profession = $request->input('profession');
             $user->save();
             return response()->json(['user' => $user, 'message' => 'Profile updated successfully', 'status' => true], 201);
     }
@@ -214,7 +220,7 @@ class AuthController extends Controller
      */
     public function get_featured_users(Request $request)
     {
-        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->random(10);
+        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->get()->random(10);
         return response()->json([
             'status' => 'success',
             'message' => 'users fetched',
@@ -222,6 +228,76 @@ class AuthController extends Controller
         ]);
     }
 
+
+    /** 
+     * change password
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'required|string',
+            'newPassword' => 'required|string',
+            'password_confirmation' => 'required|same:newPassword',
+        ]);
+
+        $id = Auth::user()->id;
+        $hashPassword = Auth::user()->password;
+        //echo ($hashPassword);
+        if(!Hash::check($request->currentPassword, $hashPassword)) {
+            return response()->json(['error' => 'Current Password is not correct', 'status' => false], 403);
+        }
+        if(Hash::check($request->newPassword, $hashPassword)) {
+            return response()->json(['error' => 'Current Password cannot be the same with new password', 'status' => false], 400);
+        }
+         try {
+            $user = User::findOrFail($id);
+            $user->password = bcrypt($request->input('newPassword'));
+
+            $user->save();
+            return response()->json(['user' => $user, 'message' => 'Password changed successfully', 'status' => true], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong!'.$e, 'status' => false], 500);
+        }
+
+    }
+
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email',
+        ]);
+        $email = $request->input('email');
+        $user = User::where('email', $email)->get();
+        if($user) {
+        return response()->json(['user' => $user], 200);
+        }
+
+        return response()->json(['error' => 'Not found'], 404);
+
+    }
+        
+    
+    // Update profile
+    //     public function updateDetails(Request $request)
+    //     { 
+    //         $id = Auth::user()->id;
+    //         $this->validate($request, [
+    //         'name' => 'required|string|alpha|min:4',
+    //         'slug' => 'required|max:191|email|unique:users,email,' .$id,
+    //     ]);
+            
+    //         $id = Auth::user()->id;
+    //         try {
+    //         $user = User::find($id);
+    //         $user->username = $request->input('username');
+    //         $user->email = $request->input('email');
+    //         $user->save();
+    //         return response()->json(['user' => $user, 'message' => 'Profile changed successfully', 'status' => true], 201);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
+    // }
+    // }
     public function avatar(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();

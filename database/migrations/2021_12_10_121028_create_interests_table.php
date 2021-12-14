@@ -15,7 +15,7 @@ class CreateInterestsTable extends Migration
     {
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('interest');
             $table->text('description')->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('is_featured')->nullable()->default(false);

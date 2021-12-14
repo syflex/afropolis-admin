@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Event;
+use App\Models\Events;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -19,9 +19,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
-       $events = Event::all();
-        return response()->json(['events' => $events ]);
+        $events = Events::all();
+        return response()->json([
+            'data' => $events,
+            'status' => 'success',
+            'message' => 'Events retrieved successfully'
+        ], 200);
     }
 
     /**
@@ -44,27 +47,25 @@ class EventController extends Controller
     {
         //
          $this->validate($request, [
-            'title' => 'required|string|min:4',
-            'about' => 'required|string|',
-            'description' => 'required|string|',
-            'price' => 'string',
-            'eventType' => 'required|string',
-            'discount' => 'string',
-            'start' => 'required|string',
-            'end' => 'required|string',
-            'city' => 'required|string',
-            'country' => 'required|string',
+            'title' => 'required|string',
+            // 'price' => 'string',
+            // 'eventType' => 'required|string',
+            // 'discount' => 'string',
+            // 'start' => 'required|string',
+            // 'end' => 'required|string',
+            // 'city' => 'required|string',
+            // 'country' => 'required|string',
             'address' => 'required|string',
             'time' => 'required|string',
-            'session' => 'required|string',
-            'multiple' => 'string',
-            'video' => 'required|string',
+            // 'session' => 'required|string',
+            // 'multiple' => 'string',
+            // 'video' => 'required|string',
         ]);
 
-            $user = Auth::user()->id;
+            $user = Auth::user();
 
         try {
-            $event = new Event;
+            $event = new Events;
             $event->title = $request->input('title');
             $event->about = $request->input('about');
             $event->description = $request->input('description');
@@ -78,13 +79,22 @@ class EventController extends Controller
             $event->address = $request->input('address');
             $event->time = $request->input('time');
             $event->session = $request->input('session');
-            $event->multiple = $request->input('multiple');
-            $event->video = $request->input('video');
+            // $event->multiple = $request->input('multiple');
+            // $event->video = $request->input('video');
             $event->user_id = $user;
             $event->save();
-            return response()->json(['user' => $event, 'message' => 'Event created successfully', 'status' => true], 201);
+
+            return response()->json([
+                'message' => 'Event created successfully',
+                'data' => $event,
+                'status' => true
+            ], 201);
+
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Event creation Failed!', 'status' => false], 500);
+            return response()->json([
+                'message' => 'Event creation Failed!'.$e,
+                'status' => false]
+            , 500);
         }
     }
 
@@ -97,11 +107,18 @@ class EventController extends Controller
     public function show($id)
     {
         try {
-        $event = Event::findOrFail($id);
-        if($event) return response()->json(['event' => $event], 200);
-        }       
+        $event = Events::findOrFail($id);
+        if($event) return response()->json([
+            'data' => $event,
+            'status' => true,
+            'message' => 'event retrieved successfully'
+        ], 200);
+        }
          catch(\Exception $e){
-            return response()->json(['error' => 'Something went wrong', 'status' => true], 500);  
+            return response()->json([
+                'message' => 'Something went wrong',
+                'status' => true
+            ], 500);
          }
     }
 
@@ -127,23 +144,23 @@ class EventController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string|min:4',
-            'about' => 'required|string|',
-            'description' => 'required|string|',
-            'price' => 'string',
-            'eventType' => 'required|string',
-            'discount' => 'string',
-            'start' => 'required|string',
-            'end' => 'required|string',
-            'city' => 'required|string',
-            'country' => 'required|string',
-            'address' => 'required|string',
-            'time' => 'required|string',
-            'session' => 'required|string',
-            'multiple' => 'string',
-            'video' => 'required|string',
+            // 'about' => 'required|string|',
+            // 'description' => 'required|string|',
+            // 'price' => 'string',
+            // 'eventType' => 'required|string',
+            // 'discount' => 'string',
+            // 'start' => 'required|string',
+            // 'end' => 'required|string',
+            // 'city' => 'required|string',
+            // 'country' => 'required|string',
+            // 'address' => 'required|string',
+            // 'time' => 'required|string',
+            // 'session' => 'required|string',
+            // // 'multiple' => 'string',
+            // 'video' => 'required|string',
         ]);
         try {
-            $event = Event::findOrFail($id);
+            $event = Events::findOrFail($id);
             $event->title = $request->input('title');
             $event->about = $request->input('about');
             $event->description = $request->input('description');
@@ -157,12 +174,21 @@ class EventController extends Controller
             $event->address = $request->input('address');
             $event->time = $request->input('time');
             $event->session = $request->input('session');
-            $event->multiple = $request->input('multiple');
+            // $event->multiple = $request->input('multiple');
             $event->video = $request->input('video');
             $event->save();
-            return response()->json(['user' => $event, 'message' => 'Event updated successfully', 'status' => true], 201);
+
+            return response()->json([
+                'data' => $event,
+                'message' => 'Event updated successfully',
+                'status' => true
+            ], 201);
+
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Event creation Failed!', 'status' => false], 500);
+            return response()->json([
+                'message' => 'Event creation Failed!',
+                'status' => false
+            ], 500);
         }
     }
 
@@ -175,17 +201,37 @@ class EventController extends Controller
     public function destroy($id)
     {
         try{
-            $event = Event::findOrFail($id);
+            $event = Events::findOrFail($id);
             $event->delete();
-            if($car){                
-                return response()->json(['message'=> 'Event deleted successfully'], 200);  
+            if($event){
+                return response()->json([
+                    'message' => 'Event deleted successfully',
+                    'status' => true
+                ], 200);
             } else {
-                return response()->json(['message'=> 'Not found', 'status' => true], 200);  
+                return response()->json([
+                    'message'=> 'Not found',
+                    'status' => true
+                ], 200);
             }
         }
         catch(\Exception $e){
-            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
-
+            return response()->json([
+                'error' => 'Something went wrong!',
+                'status' => false
+            ], 500);
         }
+    }
+
+    /**
+     * fetch user created events
+     */
+    public function userEvents ()
+    {
+         $event = Events::where('user_id', Auth::user()->id)->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $event
+        ]);
     }
 }
