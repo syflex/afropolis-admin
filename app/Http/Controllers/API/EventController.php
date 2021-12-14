@@ -70,12 +70,12 @@ class EventController extends Controller
             $event->about = $request->input('about');
             $event->description = $request->input('description');
             $event->price = $request->input('price');
-            $event->eventType = $request->input('eventType');
+            $event->event_type = $request->input('eventType');
             $event->discount = $request->input('discount');
             $event->start = $request->input('start');
             $event->end = $request->input('end');
-            $event->city = $request->input('city');
-            $event->country = $request->input('country');
+            $event->city_id = $request->input('city');
+            $event->country_id = $request->input('country');
             $event->address = $request->input('address');
             $event->time = $request->input('time');
             $event->session = $request->input('session');
