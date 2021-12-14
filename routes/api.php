@@ -67,6 +67,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                     Route::put('/{id}', 'EventController@update');
                     Route::get('/', 'EventController@index');
                     Route::get('/{id}', 'EventController@show');
+                    Route::get('/user/events', 'EventController@userEvents');
                     Route::delete('/{id}', 'EventController@destroy');
             });
 

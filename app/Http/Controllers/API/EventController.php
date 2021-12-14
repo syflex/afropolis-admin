@@ -188,4 +188,16 @@ class EventController extends Controller
 
         }
     }
+
+    /**
+     * fetch user created events
+     */
+    public function userEvents ()
+    {
+         $event = Events::where('user_id', Auth::user()->id)->get();
+        return response()->json([
+            'status' => 'success',
+            'user' => $event
+        ]);
+    }
 }
