@@ -63,6 +63,7 @@ class EventController extends Controller
         ]);
 
             $user = Auth::user();
+            
 
         try {
             $event = new Events;
@@ -81,7 +82,7 @@ class EventController extends Controller
             $event->session = $request->input('session');
             // $event->multiple = $request->input('multiple');
              $event->video = $request->input('video');
-            $event->user_id = $user;
+            $event->user_id = $user->id;
             $event->save();
 
             return response()->json([
