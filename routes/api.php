@@ -91,6 +91,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::resource('comment', 'CommentController');
             });
 
+             Route::group(['prefix' => '/collections'], function () {
+                Route::post('/', 'CollectionController@store');
+                Route::get('/', 'CollectionController@index');
+                Route::get('/{id}', 'CollectionController@show');
+                Route::delete('/{id}', 'CollectionController@destroy');
+            });
+
         });
 
     });

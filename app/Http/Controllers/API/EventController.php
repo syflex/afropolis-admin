@@ -197,7 +197,7 @@ class EventController extends Controller
          $event = Events::where('user_id', Auth::user()->id)->get();
         return response()->json([
             'status' => 'success',
-            'user' => $event
+            'events' => $event
         ]);
     }
 }

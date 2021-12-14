@@ -42,7 +42,7 @@ class PostController extends Controller
     {
           $this->validate($request, [
             'title' => 'string',
-            'description' => 'stringsss',
+            'description' => 'string',
             'video' => 'required|string',
         ]);
 
