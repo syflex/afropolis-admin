@@ -48,18 +48,18 @@ class EventController extends Controller
         //
          $this->validate($request, [
             'title' => 'required|string',
-            // 'price' => 'string',
-            // 'eventType' => 'required|string',
-            // 'discount' => 'string',
-            // 'start' => 'required|string',
-            // 'end' => 'required|string',
-            // 'city' => 'required|string',
-            // 'country' => 'required|string',
+            'price' => 'string',
+            'eventType' => 'required|string',
+            'discount' => 'string',
+            'start' => 'required|string',
+            'end' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'required|string',
             'address' => 'required|string',
             'time' => 'required|string',
             // 'session' => 'required|string',
             // 'multiple' => 'string',
-            // 'video' => 'required|string',
+             'video' => 'required|string',
         ]);
 
             $user = Auth::user();
@@ -80,7 +80,7 @@ class EventController extends Controller
             $event->time = $request->input('time');
             $event->session = $request->input('session');
             // $event->multiple = $request->input('multiple');
-            // $event->video = $request->input('video');
+             $event->video = $request->input('video');
             $event->user_id = $user;
             $event->save();
 

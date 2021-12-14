@@ -24,8 +24,8 @@ class CreateEventsTable extends Migration
             $table->string('price')->default(0.0);
             $table->string('event_type')->nullable();
             $table->string('discount')->nullable();
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->date('start');
+            $table->date('end');
             $table->string('country_id');
             $table->string('city_id');
             $table->string('address');

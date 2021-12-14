@@ -29,4 +29,9 @@ class Comment extends Model
     {
         return $this->hasMany(Like::class, 'likeable_id')->where('likeable_type','comment');
     }
+
+     public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
