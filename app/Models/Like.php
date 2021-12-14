@@ -12,4 +12,10 @@ class Like extends Model
     protected $fillable = [
         'user_id', 'likeable_id', 'likeable_type'
     ];
+
+   public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
 }
