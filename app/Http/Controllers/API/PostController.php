@@ -19,7 +19,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('user')
-        // ->with('comments')
+         ->with('comments')
+         ->with('likes')
         ->get();
         return response()->json(['posts' => $posts ]);
     }
@@ -170,5 +171,15 @@ class PostController extends Controller
             ], 500);
 
         }
+    }
+
+    // user post
+    public function userPosts ()
+    {
+         $posts = Post::where('user_id', Auth::user()->id)->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $posts
+        ],200);
     }
 }

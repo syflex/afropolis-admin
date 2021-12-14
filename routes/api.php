@@ -75,6 +75,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                     Route::post('/', 'PostController@store');
                     Route::put('/{id}', 'PostController@update');
                     Route::get('/all', 'PostController@index');
+                    Route::get('/user/post', 'PostController@userPosts');
                     Route::get('/{id}', 'PostController@show');
                     Route::delete('/{id}', 'PostController@destroy');
             });
