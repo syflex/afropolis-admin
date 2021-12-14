@@ -105,6 +105,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::delete('/{id}', 'GenreController@destroy');
             });
 
+              Route::group(['prefix' => '/album'], function () {
+                Route::post('/', 'AlbumController@store');
+                Route::get('/', 'AlbumController@index');
+                Route::get('/{id}', 'AlbumController@show');
+                Route::delete('/{id}', 'AlbumController@destroy');
+            });
+
         });
 
     });
