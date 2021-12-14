@@ -71,4 +71,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Follow', 'follow_id', 'id')->where('user_id', auth()->user()->id);
     }
 
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+
 }
