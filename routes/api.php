@@ -91,7 +91,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::resource('comment', 'CommentController');
             });
 
-             Route::group(['prefix' => '/collections'], function () {
+            Route::group(['prefix' => '/notification'], function () {
+                Route::get('read/{id}', 'NotificationController@read');
+                Route::get('read/all', 'NotificationController@read_all');
+                Route::get('delete', 'NotificationController@delete');
+            });
+            
+            Route::group(['prefix' => '/collections'], function () {
                 Route::post('/', 'CollectionController@store');
                 Route::get('/', 'CollectionController@index');
                 Route::get('/{id}', 'CollectionController@show');

@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\AuthNotification;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -61,11 +64,11 @@ class AuthController extends Controller
 
             $user = User::create($input);
 
-            // Mail::to($user)->send(new WelcomeMail($user));
+            Mail::to($user)->send(new WelcomeMail($user));
 
-            // $title = 'Signup Notification';
-            // $body = 'Welcome to Afropolis ';
-            // $user->notify(new AuthNotification($user, $title, $body));
+            $title = 'Signup Notification';
+            $body = 'Welcome to Afropolis ';
+            $user->notify(new AuthNotification($user, $title, $body));
 
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->token;

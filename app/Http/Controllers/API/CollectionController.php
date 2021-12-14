@@ -20,9 +20,11 @@ class CollectionController extends Controller
     public function index()
     {
         $collection = Collection::all();
-     return response()->json(['collections' => $collection], 200);
-
-
+        return response()->json([
+            'status' => 'successful',
+            'message' => 'Account created successfully',
+            'data' => $collection,
+        ]);
     }
 
     /**
@@ -33,24 +35,31 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-          $this->validate($request, [
+        $this->validate($request, [
             'name' => 'string',
-            'description' => 'string',
-            'image' => 'required|string',
         ]);
 
-            $user = Auth::user()->id;
+        $user = Auth::user();
 
         try {
             $collection = new Collection;
             $collection->name = $request->input('name');
             $collection->description = $request->input('description');
             $collection->image = $request->input('image');
-            $collection->user_id = $user;
+            $collection->user_id = $user->id;
             $collection->save();
-            return response()->json(['collection' => $collection, 'message' => 'collection created successfully', 'status' => true], 201);
+
+            return response()->json([
+                'data' => $collection,
+                'message' => 'collection created successfully',
+                'status' => true],
+            201);
+
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Post creation Failed!'.$e, 'status' => false], 500);
+            return response()->json([
+                'error' => 'Post creation Failed!'.$e,
+                'status' => false]
+            , 500);
         }
     }
 
@@ -62,12 +71,19 @@ class CollectionController extends Controller
      */
     public function show($id)
     {
-         try {
+        try {
             $collection = Collection::findOrFail($id);
-            if($collection) return response()->json(['collection' => $collection], 200);
-        }       
+            if($collection) return response()->json([
+                'data' => $collection,
+                'message' => 'collection fetched successfully',
+                'status' => true,
+            ], 200);
+        }
          catch(\Exception $e){
-            return response()->json(['error' => 'Something went wrong', 'status' => true], 500);  
+            return response()->json([
+                'error' => 'Something went wrong',
+                'status' => false
+            ], 500);
         }
     }
 
@@ -94,15 +110,23 @@ class CollectionController extends Controller
         try{
             $collection = Collection::findOrFail($id);
             $collection->delete();
-            if($collection){                
-                return response()->json(['message'=> 'collection deleted successfully'], 200);  
+            if($collection){
+                return response()->json([
+                    'message' => 'collection deleted successfully',
+                    'status' => true
+                ], 200);
             } else {
-                return response()->json(['message'=> 'Not found', 'status' => true], 404);  
+                return response()->json([
+                    'message'=> 'Not found',
+                    'status' => true
+                ], 404);
             }
         }
         catch(\Exception $e){
-            return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
-
+            return response()->json([
+                'error' => 'Something went wrong!',
+                'status' => false
+            ], 500);
         }
     }
 }
