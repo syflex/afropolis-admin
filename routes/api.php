@@ -98,6 +98,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::delete('/{id}', 'CollectionController@destroy');
             });
 
+              Route::group(['prefix' => '/genre'], function () {
+                Route::post('/', 'GenreController@store');
+                Route::get('/', 'GenreController@index');
+                Route::get('/{id}', 'GenreController@show');
+                Route::delete('/{id}', 'GenreController@destroy');
+            });
+
         });
 
     });
