@@ -176,7 +176,10 @@ class PostController extends Controller
     // user post
     public function userPosts ()
     {
-         $posts = Post::where('user_id', Auth::user()->id)->get();
+         $posts = Post::with('comments')
+         ->with('likes')
+         ->where('user_id', Auth::user()->id)
+         ->get();
         return response()->json([
             'status' => 'success',
             'data' => $posts

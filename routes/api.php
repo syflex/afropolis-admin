@@ -89,7 +89,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             });
 
             Route::group(['prefix' => '/comments'], function () {
-                Route::resource('comment', 'CommentController');
+                Route::resource('/', 'CommentController');
             });
 
             Route::group(['prefix' => '/notification'], function () {
