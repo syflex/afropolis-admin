@@ -88,6 +88,12 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::resource('comment', 'CommentController');
             });
 
+            Route::group(['prefix' => '/notification'], function () {
+                Route::get('read/{id}', 'NotificationController@read');
+                Route::get('read/all', 'NotificationController@read_all');
+                Route::get('delete', 'NotificationController@delete');
+            });
+
         });
 
     });
