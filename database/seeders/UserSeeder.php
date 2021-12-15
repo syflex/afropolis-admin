@@ -30,7 +30,6 @@ class UserSeeder extends Seeder
             'slug' => 'joseeph-adeleke',
             'email' => 'josephadeleke1914@gmail.com',
             'password' =>  Hash::make('Qwerty1'),
-            'phone' => '2347088886806',
             'is_admin' => true,
             'active' => true,
         ]);
