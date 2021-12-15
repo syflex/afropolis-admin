@@ -134,6 +134,11 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::delete('/{id}', 'PlaylisController@destroy');
             });
 
+             Route::group(['prefix' => '/subscribes'], function () {
+                 Route::post('/', 'EventSubscriptionController@store');
+                 Route::get('/', 'EventSubscriptionController@index');
+            });
+
         });
 
     });
