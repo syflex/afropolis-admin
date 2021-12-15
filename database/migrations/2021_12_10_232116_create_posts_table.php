@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('interest_id')->nullable();
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
-            $table->string('video');
+            $table->string('video_url');
             $table->timestamps();
         });
     }
