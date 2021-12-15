@@ -24,4 +24,9 @@ class Events extends Model
         'is_featured',
     ];
 
+     public function eventSubscription()
+    {
+        return $this->hasMany(EventSubscription::class);
+    }
+
 }
