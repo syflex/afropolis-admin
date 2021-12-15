@@ -41,7 +41,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
 
             Route::group(['prefix'=> '/accounts'], function () {
                 Route::get('user', 'AuthController@user');
-                Route::get('featured-users', 'AuthController@get_featured_users');
+                Route::get('/featured-users', 'AuthController@get_featured_users');
                 Route::put('/user/editProfile', 'AuthController@editProfile');
                 Route::put('/changePassword', 'AuthController@changePassword');
                 Route::post('/forgotPassword', 'AuthController@forgotPassword');
@@ -54,7 +54,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             Route::group(['prefix'=> '/follow'], function () {
                 Route::post('/', 'FollowController@store');
                 Route::get('following/{user_id}', 'FollowController@followings');
-                Route::get('followers/{user_id}', 'FollowController@followers');
+                Route::get('/followers/{user_id}', 'FollowController@followers');
             });
 
             Route::group(['prefix'=> '/like'], function () {

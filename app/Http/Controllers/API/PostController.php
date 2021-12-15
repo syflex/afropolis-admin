@@ -182,7 +182,8 @@ class PostController extends Controller
          ->get();
         return response()->json([
             'status' => 'success',
+            'message'=> 'Post fetched',
             'data' => $posts
-        ],200);
+        ]);
     }
 }

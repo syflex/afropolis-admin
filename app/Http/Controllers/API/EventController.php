@@ -45,58 +45,17 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
-         $this->validate($request, [
-            'title' => 'required|string',
-            'price' => 'string',
-            'eventType' => 'required|string',
-            'discount' => 'string',
-            'start' => 'required|string',
-            'end' => 'required|string',
-            'city' => 'required|string',
-            'country' => 'required|string',
-            'address' => 'required|string',
-            'time' => 'required|string',
-            // 'session' => 'required|string',
-            // 'multiple' => 'string',
-             'video' => 'required|string',
-        ]);
 
-            $user = Auth::user();
-            
+        $user = Auth::user();            
+        $input = $request->all();
+        $input['user_id'] = $user->id;
+        $event = Events::create($input);
 
-        try {
-            $event = new Events;
-            $event->title = $request->input('title');
-            $event->about = $request->input('about');
-            $event->description = $request->input('description');
-            $event->price = $request->input('price');
-            $event->event_type = $request->input('eventType');
-            $event->discount = $request->input('discount');
-            $event->start = $request->input('start');
-            $event->end = $request->input('end');
-            $event->city_id = $request->input('city');
-            $event->country_id = $request->input('country');
-            $event->address = $request->input('address');
-            $event->time = $request->input('time');
-            $event->session = $request->input('session');
-            // $event->multiple = $request->input('multiple');
-             $event->video = $request->input('video');
-            $event->user_id = $user->id;
-            $event->save();
-
-            return response()->json([
-                'message' => 'Event created successfully',
-                'data' => $event,
-                'status' => true
+        return response()->json([
+         'message' => 'Event created successfully',
+         'data' => $event,
+         'status' => true
             ], 201);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Event creation Failed!'.$e,
-                'status' => false]
-            , 500);
-        }
     }
 
     /**
