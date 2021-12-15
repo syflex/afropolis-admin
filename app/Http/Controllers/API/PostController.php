@@ -53,7 +53,7 @@ class PostController extends Controller
             $post = new Post;
             $post->title = $request->input('title');
             $post->description = $request->input('description');
-            $post->video = $request->input('video');
+            $post->video_url = $request->input('video');
             $post->user_id = $user->id;
             $post->save();
 
