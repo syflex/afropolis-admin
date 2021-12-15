@@ -126,6 +126,14 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 // Route::delete('/{id}', 'UserInterestController@destroy');
             });
 
+              Route::group(['prefix' => '/playlists'], function () {
+                Route::post('/', 'PlaylisController@store');
+                 Route::get('/', 'PlaylisController@index');
+                 Route::get('/{id}', 'PlaylisController@show');
+                 Route::put('/{id}', 'PlaylisController@update');
+                 Route::delete('/{id}', 'PlaylisController@destroy');
+            });
+
         });
 
     });
