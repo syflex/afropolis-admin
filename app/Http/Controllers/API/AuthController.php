@@ -223,7 +223,7 @@ class AuthController extends Controller
      */
     public function get_featured_users(Request $request)
     {
-        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->get();
+        $users = User::where('active', 1)->where('deleted_at', null)->where('id', '!=', Auth::user()->id)->get()->random(3);
         return response()->json([
             'status' => 'success',
             'message' => 'users fetched',
