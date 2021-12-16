@@ -92,4 +92,9 @@ class User extends Authenticatable
         return $this->hasMany(SongArtist::class);
     }
 
+     public function verifyAccount()
+    {
+        return $this->hasOne(VerifiedUser::class);
+    }
+
 }

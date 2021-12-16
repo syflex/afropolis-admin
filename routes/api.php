@@ -243,6 +243,14 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/{id}', 'VideoKeywordController@show');
                  Route::delete('/{id}', 'VideoKeywordController@destroy');
                 //  Route::put('/{id}', 'VideoKeywordController@update');
+            }); 
+            
+            Route::group(['prefix' => '/verified_users'], function () {
+                 Route::post('/', 'VerifiedUserController@store');
+                 Route::get('/', 'VerifiedUserController@index');
+                 Route::get('/{id}', 'VerifiedUserController@show');
+                 Route::delete('/{id}', 'VerifiedUserController@destroy');
+                //  Route::put('/{id}', 'VideoKeywordController@update');
             });
 
 
