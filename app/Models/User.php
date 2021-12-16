@@ -81,4 +81,9 @@ class User extends Authenticatable
         return $this->hasMany(UserInterest::class,'interest_id');
     }
 
+    public function collections()
+    {
+        return $this->hasMany(Collection::class);
+    }
+
 }

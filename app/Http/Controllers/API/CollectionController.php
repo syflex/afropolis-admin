@@ -19,10 +19,11 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $collection = Collection::all();
+        $collection = Collection::with('user')
+        ->get();
         return response()->json([
             'status' => 'successful',
-            'message' => 'Account created successfully',
+            'message' => 'collections fetched successfully',
             'data' => $collection,
         ]);
     }
@@ -72,12 +73,12 @@ class CollectionController extends Controller
     public function show($id)
     {
         try {
-            $collection = Collection::findOrFail($id);
+            $collection = Collection::with('user')->findOrFail($id);
             if($collection) return response()->json([
                 'data' => $collection,
                 'message' => 'collection fetched successfully',
                 'status' => true,
-            ], 200);
+            ]);
         }
          catch(\Exception $e){
             return response()->json([
