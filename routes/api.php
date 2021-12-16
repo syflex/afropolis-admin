@@ -218,6 +218,14 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::put('/{id}', 'VideoController@update');
             });
 
+             Route::group(['prefix' => '/video_interest'], function () {
+                 Route::post('/', 'VideoInterestController@store');
+                 Route::get('/', 'VideoInterestController@index');
+                 Route::get('/{id}', 'VideoInterestController@show');
+                 Route::delete('/{id}', 'VideoInterestController@destroy');
+                 Route::put('/{id}', 'VideoInterestController@update');
+            });
+
 
              Route::group(['prefix' => '/category'], function () {
                  Route::post('/', 'CategoryController@store');

@@ -9,6 +9,9 @@ class VideoInterest extends Model
 {
     use HasFactory;
 
+    protected $table = 'video_interests';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +29,7 @@ class VideoInterest extends Model
      */
     public function video()
     {
-        return $this->belongsTo(Videos::class);
+        return $this->belongsTo(Video::class);
     }
 
     /**

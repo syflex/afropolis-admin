@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Songs;
+use App\Models\VideoInterest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class SongController extends Controller
+class VideoInterestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +17,11 @@ class SongController extends Controller
      */
     public function index()
     {
-         $songs = Songs::all();
+         $videos = VideoInterest::with('video')->with('interest')->get();
             return response()->json([
                 'status' => 'successful',
-                'message' => 'songs  fetched successfully',
-                'data' => $songs,
+                'message' => 'fetched successfully',
+                'data' => $videos,
             ]);
     }
 
@@ -33,13 +33,13 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $song = Songs::create($input);
+         $input = $request->all();
+        $video = VideoInterest::create($input);
 
         return response()->json([
             'status' => 'success',
             'message' => 'added successfully',
-            'data' => $song
+            'data' => $video
         ]);
     }
 
@@ -51,14 +51,17 @@ class SongController extends Controller
      */
     public function show($id)
     {
-        try {
-        $song = Songs::findOrFail($id);
+         try {
+        $video = VideoInterest::findOrFail($id)
+        ->with('video')
+        ->with('interest')
+        ->get();
     
-        if($song) return response()->json([
-            'data' => $song,
+        if($video) return response()->json([
+            'data' => $video,
             'status' => true,
             'message' => 'retrieved Song'
-        ], 200);
+        ]);
         }
          catch(\Exception $e){
             return response()->json([
@@ -77,19 +80,7 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $song = Songs::findOrFail($id);
-         $song->title = $request->input('title');
-         $song->year = $request->input('year');
-         $song->description = $request->input('description');
-         $song->image_url = $request->input('image_url');
-         $song->song_url = $request->input('song_url');
-         $song->save();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'update success',
-            'data' => $song
-        ]);
+        //
     }
 
     /**
@@ -100,12 +91,12 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            $song = Songs::findOrFail($id);
-            $song->delete();
-            if($song){
+         try{
+            $video = VideoInterest::findOrFail($id);
+            $video->delete();
+            if($video){
                 return response()->json([
-                    'message' => 'Song deleted successfully',
+                    'message' => 'deleted successfully',
                     'status' => true
                 ]);
             } else {

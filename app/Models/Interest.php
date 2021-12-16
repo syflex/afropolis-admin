@@ -23,5 +23,11 @@ class Interest extends Model
     {
         return $this->hasMany(VideoCategory::class);
     }
+
+      public function videoInterest()
+    {
+        return $this->hasMany(VideoInterest::class);
+    }
+
     
 }
