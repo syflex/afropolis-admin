@@ -36,4 +36,9 @@ class Collection extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function videoCollection()
+    {
+        return $this->hasMany(VideoCollection::class);
+    }
 }
