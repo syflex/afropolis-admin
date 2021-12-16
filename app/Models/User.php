@@ -86,4 +86,10 @@ class User extends Authenticatable
         return $this->hasMany(Collection::class);
     }
 
+
+     public function artist()
+    {
+        return $this->hasMany(SongArtist::class);
+    }
+
 }
