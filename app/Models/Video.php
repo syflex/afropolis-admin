@@ -42,4 +42,9 @@ class Video extends Model
         return $this->hasMany(VideoCollection::class);
     }
 
+     public function videoKeyword()
+    {
+        return $this->hasMany(VideoKeyword::class);
+    }
+
 }
