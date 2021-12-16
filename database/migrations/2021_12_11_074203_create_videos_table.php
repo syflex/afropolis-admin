@@ -22,7 +22,7 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('video_url');
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

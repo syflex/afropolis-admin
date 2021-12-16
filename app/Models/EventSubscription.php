@@ -28,9 +28,9 @@ class EventSubscription extends Model
         'email',
     ];
 
-     public function event()
+    public function event()
     {
-        return $this->belongsTo(Event::class);
+      return $this->belongsTo(Event::class);
     }
 
 

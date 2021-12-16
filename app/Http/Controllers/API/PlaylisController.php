@@ -17,13 +17,21 @@ class PlaylisController extends Controller
      */
     public function index()
     {
-     try {
-        $playlists = Playlists::all();
-        if($playlists) return response()->json([
-            'data' => $playlists,
-            'status' => true,
-            'message' => 'playlist retrieved successfully'
-        ]);
+        try {
+            $playlists = Playlists::all();
+
+            if(!$playlists){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No playlist found'
+                ]);
+            }
+
+            return response()->json([
+                'data' => $playlists,
+                'status' => true,
+                'message' => 'playlist retrieved successfully'
+            ]);
         }
          catch(\Exception $e){
             return response()->json([
@@ -60,12 +68,12 @@ class PlaylisController extends Controller
     public function show($id)
     {
          try {
-        $playlist = Playlists::findOrFail($id);
-        if($playlist) return response()->json([
-            'data' => $playlist,
-            'status' => true,
-            'message' => 'platlist retrieved successfully'
-        ]);
+            $playlist = Playlists::findOrFail($id);
+            if($playlist) return response()->json([
+                'data' => $playlist,
+                'status' => true,
+                'message' => 'platlist retrieved successfully'
+            ]);
         }
          catch(\Exception $e){
             return response()->json([
