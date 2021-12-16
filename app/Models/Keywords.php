@@ -53,4 +53,9 @@ class Keywords extends Model
     {
         return $this->hasMany(VideoKeyword::class);
     }
+
+    public function albumKeyword()
+    {
+        return $this->hasMany(AlbumKeyword::class);
+    }
 }

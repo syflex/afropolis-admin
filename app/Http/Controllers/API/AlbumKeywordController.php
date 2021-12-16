@@ -4,11 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Songs;
+use App\Models\AlbumKeyword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
-class SongController extends Controller
+class AlbumKeywordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +18,11 @@ class SongController extends Controller
      */
     public function index()
     {
-         $songs = Songs::all();
+         $album = AlbumKeyword::with('album')->with('keyword')->get();
             return response()->json([
                 'status' => 'successful',
-                'message' => 'songs  fetched successfully',
-                'data' => $songs,
+                'message' => 'fetched successfully',
+                'data' => $album,
             ]);
     }
 
@@ -33,13 +34,13 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-         $input = $request->all();
-        $song = Songs::create($input);
+        $input = $request->all();
+        $album = AlbumKeyword::create($input);
 
         return response()->json([
             'status' => 'success',
             'message' => 'added successfully',
-            'data' => $song
+            'data' => $album
         ]);
     }
 
@@ -52,13 +53,13 @@ class SongController extends Controller
     public function show($id)
     {
         try {
-        $song = Songs::findOrFail($id);
+        $album = AlbumKeyword::findOrFail($id)->with('album')->with('keyword')->get();
     
-        if($song) return response()->json([
-            'data' => $song,
+        if($album) return response()->json([
+            'data' => $album,
             'status' => true,
-            'message' => 'retrieved Song'
-        ], 200);
+            'message' => 'retrieved successfully'
+        ]);
         }
          catch(\Exception $e){
             return response()->json([
@@ -77,19 +78,7 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $song = Songs::findOrFail($id);
-         $song->title = $request->input('title');
-         $song->year = $request->input('year');
-         $song->description = $request->input('description');
-         $song->image_url = $request->input('image_url');
-         $song->song_url = $request->input('song_url');
-         $song->save();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'update success',
-            'data' => $song
-        ]);
+        //
     }
 
     /**
@@ -101,11 +90,11 @@ class SongController extends Controller
     public function destroy($id)
     {
         try{
-            $song = Songs::findOrFail($id);
-            $song->delete();
-            if($song){
+            $album = AlbumKeyword::findOrFail($id);
+            $album->delete();
+            if($album){
                 return response()->json([
-                    'message' => 'Song deleted successfully',
+                    'message' => 'deleted successfully',
                     'status' => true
                 ]);
             } else {
@@ -122,5 +111,6 @@ class SongController extends Controller
             ], 500);
         }
     }
+    
     
 }

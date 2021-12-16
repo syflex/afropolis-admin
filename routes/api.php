@@ -119,6 +119,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::delete('/{id}', 'AlbumController@destroy');
             });
 
+            Route::group(['prefix' => '/album_keyword'], function () {
+                Route::post('/', 'AlbumKeywordController@store');
+                Route::get('/', 'AlbumKeywordController@index');
+                Route::get('/{id}', 'AlbumKeywordController@show');
+                Route::delete('/{id}', 'AlbumKeywordController@destroy');
+            });
+
             Route::group(['prefix' => '/userInterest'], function () {
                 Route::post('/', 'UserInterestController@store');
                 // Route::get('/', 'UserInterestController@index');

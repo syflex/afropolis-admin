@@ -50,4 +50,9 @@ class Albums extends Model
         return $this->hasOne(SongAlbum::class);
     }
 
+     public function albumKeyword()
+    {
+        return $this->hasMany(AlbumKeyword::class);
+    }
+
 }
