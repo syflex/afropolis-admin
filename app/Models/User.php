@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function followed()
     {
-        return $this->hasMany(Follow::class, 'follow_id', 'id')->where('user_id', auth()->user()->id);
+        return $this->hasMany(Follow::class, 'user_id', 'id')->where('user_id', auth()->user()->id);
     }
 
     public function post()
