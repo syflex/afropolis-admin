@@ -18,4 +18,9 @@ class Genre extends Model
         'name',
         'image'
     ];
+
+      public function genre()
+    {
+        return $this->hasMany(SongGenre::class);
+    }
 }

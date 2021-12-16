@@ -61,4 +61,9 @@ class Songs extends Model
         return $this->hasMany(SongArtist::class);
     }
 
+       public function genre()
+    {
+        return $this->hasMany(SongGenre::class);
+    }
+
 }

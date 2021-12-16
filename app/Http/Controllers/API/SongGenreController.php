@@ -4,13 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Genre;
+use App\Models\SongGenre;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 
-
-class GenreController extends Controller
+class SongGenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +17,10 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genre = Genre::all();
-         return response()->json(['data' => $genre], 200);
+        $genre = SongGenre::with('song')->with('genre')->get();
+        return response()->json(['data' => $genre, 
+         'status' => true,
+        'message' => 'retrieved  Song Genreg artist ']);
     }
 
     /**
@@ -31,23 +31,15 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-          $this->validate($request, [
-            'name' => 'string',
-            'image' => 'required|string',
+        
+        $input = $request->all();
+        $song = SongGenre::create($input);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'added successfully',
+            'data' => $song
         ]);
-
-            // $user = Auth::user()->id;
-
-        try {
-            $genre = new Genre;
-            $genre->name = $request->input('name');
-            $genre->image = $request->input('image');
-            // $genre->user_id = $user;
-            $genre->save();
-            return response()->json(['data' => $genre, 'message' => 'genre created successfully', 'status' => true], 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Post creation Failed!'.$e, 'status' => false], 500);
-        }
     }
 
     /**
@@ -58,13 +50,18 @@ class GenreController extends Controller
      */
     public function show($id)
     {
+         {
          try {
-            $genre = Genre::findOrFail($id);
-            if($genre) return response()->json(['data' => $genre], 200);
+            $genre = SongGenre::findOrFail($id)
+            ->with('song')
+            ->with('genre')
+            ->get();
+            if($genre) return response()->json(['data' => $genre]);
         }       
          catch(\Exception $e){
             return response()->json(['error' => 'Something went wrong', 'status' => true], 500);  
         }
+    }
     }
 
     /**
@@ -88,18 +85,18 @@ class GenreController extends Controller
     public function destroy($id)
     {
          try{
-            $genre = Genre::findOrFail($id);
+            $genre = SongGenre::findOrFail($id);
             $genre->delete();
             if($genre){                
-                return response()->json(['message'=> 'genre deleted successfully'], 200);  
+                return response()->json(['message'=> 'genre deleted successfully']);  
             } else {
-                return response()->json(['message'=> 'Not found', 'status' => true], 404);  
+            return response()->json(['message'=> 'Not found', 'status' => true], 404);  
             }
         }
         catch(\Exception $e){
             return response()->json(['error' => 'Something went wrong!', 'status' => false], 500);
-
         }
     
     }
+    
 }

@@ -185,6 +185,15 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::delete('/{id}', 'SongArtistController@destroy');
                 //  Route::put('/{id}', 'PlaylistSongController@update');
             });
+            
+            
+            Route::group(['prefix' => '/song_genre'], function () {
+                 Route::post('/', 'SongGenreController@store');
+                 Route::get('/', 'SongGenreController@index');
+                 Route::get('/{id}', 'SongGenreController@show');
+                 Route::delete('/{id}', 'SongGenreController@destroy');
+                //  Route::put('/{id}', 'PlaylistSongController@update');
+            });
 
 
         });
