@@ -60,12 +60,12 @@ class PlaylisController extends Controller
     public function show($id)
     {
          try {
-        $playlist = Playlists::findOrFail($id);
-        if($playlist) return response()->json([
-            'data' => $playlist,
-            'status' => true,
-            'message' => 'platlist retrieved successfully'
-        ]);
+            $playlist = Playlists::findOrFail($id);
+            if($playlist) return response()->json([
+                'data' => $playlist,
+                'status' => true,
+                'message' => 'platlist retrieved successfully'
+            ]);
         }
          catch(\Exception $e){
             return response()->json([

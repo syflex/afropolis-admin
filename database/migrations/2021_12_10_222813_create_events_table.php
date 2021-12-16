@@ -19,23 +19,19 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('interest_id')->nullable();
             $table->string('title');
+            $table->string('slug');
             $table->longText('description')->nullable();
             $table->longText('about')->nullable();
             $table->string('image_url')->nullable();
             $table->string('video_url')->nullable();
-
-            $table->string('price')->default(0.0);
             $table->string('event_type')->nullable();
+            $table->string('price')->default(0.0);
             $table->string('discount')->nullable();
-            $table->string('start');
-            $table->string('end');
-            
-            $table->string('time');
-            $table->string('session');
-            $table->jsonb('multiple')->nullable();
-
-
+            $table->string('is_published')->nullable();
+            $table->dateTime('publish_at')->nullable();
+            $table->string('is_featured')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

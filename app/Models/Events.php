@@ -15,13 +15,8 @@ class Events extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_id',
-        'title',
-        'slug',
-        'about',
-        'description',
-        'is_published',
-        'is_featured',
+        'user_id','category_id','interest_id','title','slug','description','about',
+        'image_url','event_type','price','discount','is_published','publish_at','is_featured'
     ];
 
 }
