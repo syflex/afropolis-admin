@@ -29,7 +29,7 @@ class UserInterestController extends Controller
      */
     public function store(Request $request)
     {
-        $checkStatus = UserInterest::where('user_id', '=', (Auth::user()->id))->where('category_id', $request->id)->count();
+        $checkStatus = UserInterest::where('user_id', '=', (Auth::user()->id))->where('interest_id', $request->id)->count();
         if (!$checkStatus) {
             $interests = new  UserInterest;
             $interests->user_id = Auth::user()->id;
@@ -37,7 +37,7 @@ class UserInterestController extends Controller
             $interests->save();
             $message = 'added';
         }else {
-            $interests =  UserInterest::where('user_id', (Auth::user()->id))->where('category_id', $request->id);
+            $interests =  UserInterest::where('user_id', (Auth::user()->id))->where('interest_id', $request->id);
             $interests->delete();
             $message = 'unfollowed';
         }
