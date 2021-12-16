@@ -93,12 +93,15 @@ class PlaylisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id = Playlists::findOrFail($id);
-        $input = $request->all();
-        $playlist = Playlists::create($input)->where('id', '=', $id);
+
+        $playlist = Playlists::findOrFail($id);
+         $playlist->name = $request->input('name');
+         $playlist->image_url = $request->input('image_url');
+         $playlist->description = $request->input('description');
+         $playlist->save();
 
         return response()->json([
-         'message' => 'Playlist created successfully',
+         'message' => 'Playlist updated successfully',
          'data' => $playlist,
          'status' => true
         ], 201);
