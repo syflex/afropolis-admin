@@ -20,7 +20,7 @@ class AlbumController extends Controller
     public function index()
     {
          $album = Albums::all();
-         return response()->json(['album' => $album], 200);
+         return response()->json(['album' => $album]);
     }
 
     /**

@@ -43,4 +43,9 @@ class Songs extends Model
         'description'
     ];
 
+     public function playlistSong()
+    {
+        return $this->hasMany(PlaylistSong::class);
+    }
+
 }

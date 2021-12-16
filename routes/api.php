@@ -161,6 +161,14 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::delete('/{id}', 'SongController@destroy');
                  Route::put('/{id}', 'SongController@update');
             });
+            
+            Route::group(['prefix' => '/playlist_songs'], function () {
+                 Route::post('/', 'PlaylistSongController@store');
+                 Route::get('/', 'PlaylistSongController@index');
+                 Route::get('/{id}', 'PlaylistSongController@show');
+                 Route::delete('/{id}', 'PlaylistSongController@destroy');
+                //  Route::put('/{id}', 'PlaylistSongController@update');
+            });
 
 
         });
