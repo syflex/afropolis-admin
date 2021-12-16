@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSongGenresTable extends Migration
+class CreateSongKeywordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSongGenresTable extends Migration
      */
     public function up()
     {
-        Schema::create('song_genres', function (Blueprint $table) {
+        Schema::create('song_keywords', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('keyword_id');
             $table->unsignedBigInteger('song_id');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateSongGenresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('song_genres');
+        Schema::dropIfExists('song_keywords');
     }
 }

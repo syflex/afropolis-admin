@@ -193,6 +193,14 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/{id}', 'SongGenreController@show');
                  Route::delete('/{id}', 'SongGenreController@destroy');
                 //  Route::put('/{id}', 'PlaylistSongController@update');
+            }); 
+            
+            Route::group(['prefix' => '/song_keyword'], function () {
+                 Route::post('/', 'SongKeywordController@store');
+                 Route::get('/', 'SongKeywordController@index');
+                 Route::get('/{id}', 'SongKeywordController@show');
+                 Route::delete('/{id}', 'SongKeywordController@destroy');
+                //  Route::put('/{id}', 'PlaylistSongController@update');
             });
 
 

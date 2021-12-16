@@ -43,4 +43,9 @@ class Keywords extends Model
     {
         return $this->hasMany(PlaylistKeyword::class);
     }
+
+       public function songKeyword()
+    {
+        return $this->hasMany(SongKeyword::class);
+    }
 }
