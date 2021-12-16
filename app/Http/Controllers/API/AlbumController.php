@@ -21,7 +21,7 @@ class AlbumController extends Controller
     public function index()
     {
          $album = Albums::all();
-         return response()->json(['album' => $album]);
+         return response()->json(['data' => $album, 'message' => 'Fetched successfully', 'status' => true]);
     }
 
     /**
@@ -51,9 +51,9 @@ class AlbumController extends Controller
             $album->year = $request->input('year');
             // $genre->user_id = $user;
             $album->save();
-            return response()->json(['album' => $album, 'message' => 'album created successfully', 'status' => true], 201);
+            return response()->json(['data' => $album, 'message' => 'album created successfully', 'status' => true], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Post creation Failed!'.$e, 'status' => false], 500);
+            return response()->json(['error' => 'creation Failed!'.$e, 'status' => false], 500);
         }
     }
 
@@ -67,7 +67,7 @@ class AlbumController extends Controller
     {
           try {
             $album = Albums::findOrFail($id);
-            if($album) return response()->json(['album' => $album], 200);
+            if($album) return response()->json(['data' => $album], 200);
         }       
          catch(\Exception $e){
             return response()->json(['error' => 'not found went wrong', 'status' => true], 404);  

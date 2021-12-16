@@ -223,7 +223,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/', 'VideoInterestController@index');
                  Route::get('/{id}', 'VideoInterestController@show');
                  Route::delete('/{id}', 'VideoInterestController@destroy');
-                 Route::put('/{id}', 'VideoInterestController@update');
+                //  Route::put('/{id}', 'VideoInterestController@update');
             });
 
 

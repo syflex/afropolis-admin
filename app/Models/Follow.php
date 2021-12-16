@@ -25,7 +25,7 @@ class Follow extends Model
 
     public function followings()
     {
-        return $this->belongsTo(Follow::class, 'follow_id')->orderBy('name');
+        return $this->belongsTo(User::class, 'follow_id')->orderBy('name');
     }
 
 }

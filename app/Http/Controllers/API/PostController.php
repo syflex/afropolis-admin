@@ -22,7 +22,7 @@ class PostController extends Controller
          ->with('comments')
          ->with('likes')
         ->get();
-        return response()->json(['data' => $posts ]);
+        return response()->json(['data' => $posts, 'message' => "fetched successfully", 'status' => true ]);
     }
 
     /**
