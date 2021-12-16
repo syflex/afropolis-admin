@@ -50,6 +50,7 @@ class PlaylisController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['user_id']= Auth::user()->id;;
         $playlist = Playlists::create($input);
 
         return response()->json([
