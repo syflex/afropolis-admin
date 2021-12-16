@@ -5,10 +5,15 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Events;
+use App\Models\EventSession;
+use App\Models\EventAttendee;
+use App\Models\EventLocation;
+use App\Models\EventSubscribers;
+use App\Models\EventSubscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-
+use Doctrine\Common\EventSubscriber;
 
 class EventController extends Controller
 {
@@ -46,16 +51,20 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
-        $user = Auth::user();            
+        $user = Auth::user();
         $input = $request->all();
         $input['user_id'] = $user->id;
         $event = Events::create($input);
+        $event_location = EventLocation::create($input);
+        // $event_session = EventSession::create($request->session());
+        // $event_subscribers = EventAttendee::create($request->subscribers());
+        // $event_subscription =EventSubscribers::create($request->subscription());
 
         return response()->json([
-         'message' => 'Event created successfully',
-         'data' => $event,
-         'status' => true
-            ], 201);
+            'message' => 'Event created successfully',
+            'data' => $event,
+            'status' => true
+        ], 201);
     }
 
     /**
@@ -102,54 +111,40 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required|string|min:4',
-            // 'about' => 'required|string|',
-            // 'description' => 'required|string|',
-            // 'price' => 'string',
-            // 'eventType' => 'required|string',
-            // 'discount' => 'string',
-            // 'start' => 'required|string',
-            // 'end' => 'required|string',
-            // 'city' => 'required|string',
-            // 'country' => 'required|string',
-            // 'address' => 'required|string',
-            // 'time' => 'required|string',
-            // 'session' => 'required|string',
-            // // 'multiple' => 'string',
-            // 'video' => 'required|string',
-        ]);
-        try {
-            $event = Events::findOrFail($id);
-            $event->title = $request->input('title');
-            $event->about = $request->input('about');
-            $event->description = $request->input('description');
-            $event->price = $request->input('price');
-            $event->eventType = $request->input('eventType');
-            $event->discount = $request->input('discount');
-            $event->start = $request->input('start');
-            $event->end = $request->input('end');
-            $event->city = $request->input('city');
-            $event->country = $request->input('country');
-            $event->address = $request->input('address');
-            $event->time = $request->input('time');
-            $event->session = $request->input('session');
-            // $event->multiple = $request->input('multiple');
-            $event->video = $request->input('video');
-            $event->save();
+        // $this->validate($request, [
+        //     'title' => 'required|string|min:4',
+        // ]);
+        // try {
+        //     $event = Events::findOrFail($id);
+        //     $event->title = $request->input('title');
+        //     $event->about = $request->input('about');
+        //     $event->description = $request->input('description');
+        //     $event->price = $request->input('price');
+        //     $event->eventType = $request->input('eventType');
+        //     $event->discount = $request->input('discount');
+        //     $event->start = $request->input('start');
+        //     $event->end = $request->input('end');
+        //     $event->city = $request->input('city');
+        //     $event->country = $request->input('country');
+        //     $event->address = $request->input('address');
+        //     $event->time = $request->input('time');
+        //     $event->session = $request->input('session');
+        //     // $event->multiple = $request->input('multiple');
+        //     $event->video = $request->input('video');
+        //     $event->save();
 
-            return response()->json([
-                'data' => $event,
-                'message' => 'Event updated successfully',
-                'status' => true
-            ], 201);
+        //     return response()->json([
+        //         'data' => $event,
+        //         'message' => 'Event updated successfully',
+        //         'status' => true
+        //     ], 201);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Event creation Failed!',
-                'status' => false
-            ], 500);
-        }
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'message' => 'Event creation Failed!',
+        //         'status' => false
+        //     ], 500);
+        // }
     }
 
     /**
@@ -163,17 +158,18 @@ class EventController extends Controller
         try{
             $event = Events::findOrFail($id);
             $event->delete();
-            if($event){
-                return response()->json([
-                    'message' => 'Event deleted successfully',
-                    'status' => true
-                ], 200);
-            } else {
+            
+            if(!$event){
                 return response()->json([
                     'message'=> 'Not found',
                     'status' => true
                 ], 200);
             }
+
+            return response()->json([
+                'message' => 'Event deleted successfully',
+                'status' => true
+            ], 200);
         }
         catch(\Exception $e){
             return response()->json([

@@ -97,7 +97,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::get('read/all', 'NotificationController@read_all');
                 Route::get('delete', 'NotificationController@delete');
             });
-            
+
             Route::group(['prefix' => '/collections'], function () {
                 Route::post('/', 'CollectionController@store');
                 Route::get('/', 'CollectionController@index');
@@ -117,8 +117,8 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::get('/', 'AlbumController@index');
                 Route::get('/{id}', 'AlbumController@show');
                 Route::delete('/{id}', 'AlbumController@destroy');
-            }); 
-            
+            });
+
             Route::group(['prefix' => '/userInterest'], function () {
                 Route::post('/', 'UserInterestController@store');
                 // Route::get('/', 'UserInterestController@index');
@@ -126,12 +126,12 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 // Route::delete('/{id}', 'UserInterestController@destroy');
             });
 
-              Route::group(['prefix' => '/playlists'], function () {
+            Route::group(['prefix' => '/playlists'], function () {
                 Route::post('/', 'PlaylisController@store');
-                 Route::get('/', 'PlaylisController@index');
-                 Route::get('/{id}', 'PlaylisController@show');
-                 Route::put('/{id}', 'PlaylisController@update');
-                 Route::delete('/{id}', 'PlaylisController@destroy');
+                Route::get('/', 'PlaylisController@index');
+                Route::get('/{id}', 'PlaylisController@show');
+                Route::put('/{id}', 'PlaylisController@update');
+                Route::delete('/{id}', 'PlaylisController@destroy');
             });
 
              Route::group(['prefix' => '/subscribes'], function () {
