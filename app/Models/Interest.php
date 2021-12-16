@@ -18,5 +18,10 @@ class Interest extends Model
         'name','description','avatar','is_featured'
     ];
 
+
+     public function videoCategory()
+    {
+        return $this->hasMany(VideoCategory::class);
+    }
     
 }

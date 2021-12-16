@@ -31,4 +31,9 @@ class Video extends Model
         'user_id'
     ];
 
+    public function videoCategory()
+    {
+        return $this->hasMany(VideoCategory::class);
+    }
+
 }

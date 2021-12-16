@@ -9,6 +9,14 @@ class VideoCategory extends Model
 {
     use HasFactory;
 
+     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'video_categories';
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +25,7 @@ class VideoCategory extends Model
     protected $fillable = [
         'video_id',
         'interest_id',
+        'category_id',
     ];
 
     /**
@@ -26,7 +35,7 @@ class VideoCategory extends Model
      */
     public function video()
     {
-        return $this->belongsTo(Videos::class);
+        return $this->belongsTo(Video::class);
     }
 
     /**

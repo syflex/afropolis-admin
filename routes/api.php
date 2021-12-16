@@ -212,6 +212,24 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             });
 
 
+             Route::group(['prefix' => '/category'], function () {
+                 Route::post('/', 'CategoryController@store');
+                 Route::get('/', 'CategoryController@index');
+                 Route::get('/{id}', 'CategoryController@show');
+                 Route::delete('/{id}', 'CategoryController@destroy');
+                 Route::put('/{id}', 'CategoryController@update');
+            });
+
+
+              Route::group(['prefix' => '/video_category'], function () {
+                 Route::post('/', 'VideoCategoryController@store');
+                 Route::get('/', 'VideoCategoryController@index');
+                 Route::get('/{id}', 'VideoCategoryController@show');
+                 Route::delete('/{id}', 'VideoCategoryController@destroy');
+                 Route::put('/{id}', 'VideoCategoryController@update');
+            });
+
+
         });
 
     });

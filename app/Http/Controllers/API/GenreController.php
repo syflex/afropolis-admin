@@ -20,7 +20,7 @@ class GenreController extends Controller
     public function index()
     {
         $genre = Genre::all();
-         return response()->json(['data' => $genre], 200);
+         return response()->json(['data' => $genre]);
     }
 
     /**
