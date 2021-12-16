@@ -14,21 +14,21 @@ class Keywords extends Model
      *
      * @var string
      */
-    protected $table = 'keyword';
+    protected $table = 'keywords';
 
     /**
      * The name of the "created at" column.
      *
      * @var string
      */
-    const CREATED_AT = 'createdAt';
+    const CREATED_AT = 'created_at';
 
     /**
      * The name of the "updated at" column.
      *
      * @var string
      */
-    const UPDATED_AT = 'updatedAt';
+    const UPDATED_AT = 'updated_at';
 
     /**
      * The attributes that are mass assignable.
@@ -38,4 +38,9 @@ class Keywords extends Model
     protected $fillable = [
         'word'
     ];
+
+      public function playlistKeyword()
+    {
+        return $this->hasMany(PlaylistKeyword::class);
+    }
 }

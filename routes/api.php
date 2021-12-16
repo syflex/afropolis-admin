@@ -137,6 +137,19 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
              Route::group(['prefix' => '/subscribes'], function () {
                  Route::post('/', 'EventSubscriptionController@store');
                  Route::get('/', 'EventSubscriptionController@index');
+            }); 
+            
+            Route::group(['prefix' => '/playlist_keyword'], function () {
+                 Route::post('/', 'PlaylistKeywordController@store');
+                 Route::get('/', 'PlaylistKeywordController@index');
+            });
+            
+            Route::group(['prefix' => '/keywords'], function () {
+                 Route::post('/', 'KeywordController@store');
+                 Route::get('/', 'KeywordController@index');
+                 Route::get('/{id}', 'KeywordController@show');
+                 Route::delete('/{id}', 'KeywordController@destroy');
+                 Route::put('/{id}', 'KeywordController@update');
             });
 
         });
