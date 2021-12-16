@@ -42,4 +42,12 @@ class Albums extends Model
         'description'
     ];
 
+     /**
+     * Get the song album associated with the song.
+     */
+    public function songAlbum()
+    {
+        return $this->hasOne(SongAlbum::class);
+    }
+
 }

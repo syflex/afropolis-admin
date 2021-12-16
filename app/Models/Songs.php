@@ -48,4 +48,12 @@ class Songs extends Model
         return $this->hasMany(PlaylistSong::class);
     }
 
+    /**
+     * Get the song album associated with the song.
+     */
+    public function songAlbum()
+    {
+        return $this->hasOne(SongAlbum::class);
+    }
+
 }
