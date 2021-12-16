@@ -29,22 +29,24 @@ class UserInterestController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request, [
-            'id' => 'required|string',
-        ]);
-
-        $user = Auth::user();
-
-        $interest = new UserInterest;
-        $interest->interest_id = $request->input('id');
-        $interest->user_id = $user->id;
-        $interest->save();
+        $checkStatus = UserInterest::where('user_id', '=', (Auth::user()->id))->where('category_id', $request->id)->count();
+        if (!$checkStatus) {
+            $interests = new  UserInterest;
+            $interests->user_id = Auth::user()->id;
+            $interests->interest_id = $request->id;
+            $interests->save();
+            $message = 'added';
+        }else {
+            $interests =  UserInterest::where('user_id', (Auth::user()->id))->where('category_id', $request->id);
+            $interests->delete();
+            $message = 'unfollowed';
+        }
 
         return response()->json([
-                'post' => $interest,
-                'message' => 'Interest created successfully',
-                'status' => true
-            ], 201);
+            'status' => 'success',
+            'message' => $message,
+            'data' => $interests
+        ]);
     }
 
     /**
