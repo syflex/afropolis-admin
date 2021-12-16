@@ -55,6 +55,8 @@ class EventController extends Controller
         $input = $request->all();
         $input['user_id'] = $user->id;
         $event = Events::create($input);
+        
+        $input['event_id'] = $event->id;
         $event_location = EventLocation::create($input);
         // $event_session = EventSession::create($request->session());
         // $event_subscribers = EventAttendee::create($request->subscribers());
@@ -158,7 +160,7 @@ class EventController extends Controller
         try{
             $event = Events::findOrFail($id);
             $event->delete();
-            
+
             if(!$event){
                 return response()->json([
                     'message'=> 'Not found',
