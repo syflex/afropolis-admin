@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Video;
+use Illuminate\Support\Facades\Auth;
 
 
 class VideoController extends Controller
@@ -16,7 +17,13 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+          $videos = Video::all();
+
+            return response()->json([
+                'status' => 'successful',
+                'message' => 'fetched successfully',
+                'data' => $videos,
+            ]);
     }
 
     /**
@@ -38,14 +45,16 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+
         //store video
         $input = $request->all();
-        $input['user_id'] = auth()->user()->id;
+        $input['user_id'] = $user->id;
         $video = Video::create($input);
         return response()->json([
             'status' => 'success',
             'message' => 'video created successfully',
-            'user' => $video
+            'data' => $video
         ]);
     }
 
@@ -61,8 +70,8 @@ class VideoController extends Controller
         $video = Video::find($id);
         return response()->json([
             'status' => 'success',
-            'message' => 'video updated successfully',
-            'user' => $video
+            'message' => 'video fetch successfully',
+            'data' => $video
         ]);
     }
 
@@ -93,7 +102,7 @@ class VideoController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'video updated successfully',
-            'user' => $video
+            'data' => $video
         ]);
     }
 
@@ -111,7 +120,7 @@ class VideoController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'video deleted successfully',
-            'user' => $video
+            'data' => $video
         ]);
     }
 }

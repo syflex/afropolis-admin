@@ -203,6 +203,14 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 //  Route::put('/{id}', 'PlaylistSongController@update');
             });
 
+             Route::group(['prefix' => '/videos'], function () {
+                 Route::post('/', 'VideoController@store');
+                 Route::get('/', 'VideoController@index');
+                 Route::get('/{id}', 'VideoController@show');
+                 Route::delete('/{id}', 'VideoController@destroy');
+                 Route::put('/{id}', 'VideoController@update');
+            });
+
 
         });
 
