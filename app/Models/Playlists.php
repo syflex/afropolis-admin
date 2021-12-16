@@ -41,7 +41,7 @@ class Playlists extends Model
         'description',
     ];
 
-     public function playlistKeyword()
+     public function playlists()
     {
         return $this->hasMany(PlaylistKeyword::class);
     }

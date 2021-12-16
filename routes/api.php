@@ -140,8 +140,10 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             }); 
             
             Route::group(['prefix' => '/playlist_keyword'], function () {
-                 Route::post('/', 'PlaylistKeywordController@store');
-                 Route::get('/', 'PlaylistKeywordController@index');
+                Route::post('/', 'PlaylistKeywordController@store');
+                Route::get('/', 'PlaylistKeywordController@index');
+                Route::get('/{id}', 'PlaylistKeywordController@show');
+                Route::delete('/{id}', 'PlaylistKeywordController@destroy');
             });
             
             Route::group(['prefix' => '/keywords'], function () {

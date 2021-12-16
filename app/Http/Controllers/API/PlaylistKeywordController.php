@@ -17,12 +17,14 @@ class PlaylistKeywordController extends Controller
      */
     public function index()
     {
-         $playlist_keyword = PlaylistKeyword::all();
-        return response()->json([
-            'status' => 'successful',
-            'message' => 'Playlist Keyword fetched successfully',
-            'data' => $playlist_keyword,
-        ]);
+        $playlist_keyword = PlaylistKeyword::with('keyword')
+        ->with('playlist')
+        ->get();
+            return response()->json([
+                'status' => 'successful',
+                'message' => 'Playlist Keyword fetched successfully',
+                'data' => $playlist_keyword,
+            ]);
     }
 
     /**
@@ -51,7 +53,24 @@ class PlaylistKeywordController extends Controller
      */
     public function show($id)
     {
-        //
+         try {
+        $playlist_keyword = PlaylistKeyword::findOrFail($id)
+        ->with('keyword')
+        ->with('playlist')->get();
+
+    
+        if($playlist_keyword) return response()->json([
+            'data' => $playlist_keyword,
+            'status' => true,
+            'message' => 'retrieved playlist_keyword'
+        ], 200);
+        }
+         catch(\Exception $e){
+            return response()->json([
+                'error' => 'Something went wrong',
+                'status' => true
+            ], 500);
+        }
     }
 
     /**
@@ -74,6 +93,27 @@ class PlaylistKeywordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $playlist_keyword = PlaylistKeyword::findOrFail($id);
+            $playlist_keyword->delete();
+            if($playlist_keyword){
+                return response()->json([
+                    'message' => 'playlist deleted successfully',
+                    'status' => true
+                ]);
+            } else {
+                return response()->json([
+                    'message'=> 'Not found',
+                    'status' => true
+                ]);
+            }
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'error' => 'Something went wrong!',
+                'status' => false
+            ], 500);
+        }
     }
+    
 }

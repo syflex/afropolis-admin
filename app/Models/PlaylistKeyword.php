@@ -26,7 +26,7 @@ class PlaylistKeyword extends Model
         'playlist_id',
     ];
 
-    public function playlists()
+    public function playlist()
     {
         return $this->belongsTo(Playlists::class);
     }
