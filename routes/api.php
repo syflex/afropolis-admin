@@ -154,6 +154,15 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::put('/{id}', 'KeywordController@update');
             });
 
+             Route::group(['prefix' => '/songs'], function () {
+                 Route::post('/', 'SongController@store');
+                 Route::get('/', 'SongController@index');
+                 Route::get('/{id}', 'SongController@show');
+                 Route::delete('/{id}', 'SongController@destroy');
+                 Route::put('/{id}', 'SongController@update');
+            });
+
+
         });
 
     });

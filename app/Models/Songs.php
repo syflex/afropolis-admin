@@ -14,21 +14,21 @@ class Songs extends Model
      *
      * @var string
      */
-    protected $table = 'song';
+    protected $table = 'songs';
 
     /**
      * The name of the "created at" column.
      *
      * @var string
      */
-    const CREATED_AT = 'createdAt';
+    const CREATED_AT = 'created_at';
 
     /**
      * The name of the "updated at" column.
      *
      * @var string
      */
-    const UPDATED_AT = 'updatedAt';
+    const UPDATED_AT = 'updated_at';
 
     /**
      * The attributes that are mass assignable.
@@ -38,8 +38,8 @@ class Songs extends Model
     protected $fillable = [
         'title',
         'year',
-        'cover',
-        'song',
+        'image_url',
+        'song_url',
         'description'
     ];
 
