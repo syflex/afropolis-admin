@@ -30,7 +30,25 @@ class ViewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $alreadyViewed =  View::where('user_id', $user-id);
+        if($alreadyViewed) {
+            return response()->json([
+            'status' => 'success',
+            'message' => 'already viewed',
+            'data' => $alreadyViewed
+        ]);
+        }
+
+        $input = $request->all();
+        $input['user_id'] = $user->id;
+        $view = View::create($input);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'added successfully',
+            'data' => $view
+        ]);
     }
 
     /**

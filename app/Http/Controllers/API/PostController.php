@@ -81,7 +81,11 @@ class PostController extends Controller
     public function show($id)
     {
         try {
-        $post = Post::findOrFail($id);
+        $post = Post::findOrFail($id)
+        ->with('user')
+         ->with('comments')
+         ->with('likes')
+        ->get();
         if($post) return response()->json([
             'data' => $post,
             'status' => true,
