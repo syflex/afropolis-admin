@@ -52,4 +52,9 @@ class Video extends Model
         return $this->hasMany(VideoInterest::class);
     }
 
+     public function view()
+    {
+        return $this->hasMany(View::class);
+    }
+
 }

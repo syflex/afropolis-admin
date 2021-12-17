@@ -30,25 +30,31 @@ class ViewController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $alreadyViewed =  View::where('user_id', $user-id);
-        if($alreadyViewed) {
-            return response()->json([
-            'status' => 'success',
-            'message' => 'already viewed',
-            'data' => $alreadyViewed
-        ]);
-        }
 
-        $input = $request->all();
-        $input['user_id'] = $user->id;
-        $view = View::create($input);
+        $user = Auth::user()->id;
+
+        $alreadyViewed =  View::where('user_id', $user)
+               ->where('video_id', $request->video_id)
+               ->first();
+        if(!$alreadyViewed) {
+             $input = $request->all();
+             $input['user_id'] = $user;
+            $view = View::create($input);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'added successfully',
+            'message' => 'viewed successfully',
             'data' => $view
-        ]);
+        ]);        
+    }
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'already viewed',
+        'data' => $alreadyViewed
+]);
+
+       
     }
 
     /**
