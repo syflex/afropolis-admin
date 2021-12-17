@@ -22,4 +22,9 @@ class View extends Model
         'video_id',
     ];
 
+     public function view()
+    {
+        return $this->belongsTo(Video::class);
+    }
+
 }

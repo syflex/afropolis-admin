@@ -17,7 +17,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-          $videos = Video::all();
+          $videos = Video::with('view')->get();
 
             return response()->json([
                 'status' => 'successful',
@@ -67,7 +67,7 @@ class VideoController extends Controller
     public function show($id)
     {
         //get a video
-        $video = Video::find($id);
+        $video = Video::find($id)->with('view')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'video fetch successfully',
