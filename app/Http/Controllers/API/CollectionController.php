@@ -73,7 +73,9 @@ class CollectionController extends Controller
     public function show($id)
     {
         try {
-            $collection = Collection::with('user')->findOrFail($id);
+            $collection = Collection::with('user')->findOrFail($id)
+            ->with('user')
+            ->get();
             if($collection) return response()->json([
                 'data' => $collection,
                 'message' => 'collection fetched successfully',
