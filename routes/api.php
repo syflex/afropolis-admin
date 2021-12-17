@@ -48,12 +48,12 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::get('/user/{id}', 'AuthController@getUser');
                 Route::get('/all', 'AuthController@allUsers');
                 Route::put('/avatar', 'AuthController@avatar');
-                Route::get('logout', 'AuthController@logout');
+                Route::get('/logout', 'AuthController@logout');
             });
 
             Route::group(['prefix'=> '/follow'], function () {
                 Route::post('/', 'FollowController@store');
-                Route::get('following/{user_id}', 'FollowController@followings');
+                Route::get('/following/{user_id}', 'FollowController@followings');
                 Route::get('/followers/{user_id}', 'FollowController@followers');
             });
 
@@ -144,15 +144,15 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
              Route::group(['prefix' => '/subscribes'], function () {
                  Route::post('/', 'EventSubscriptionController@store');
                  Route::get('/', 'EventSubscriptionController@index');
-            }); 
-            
+            });
+
             Route::group(['prefix' => '/playlist_keyword'], function () {
                 Route::post('/', 'PlaylistKeywordController@store');
                 Route::get('/', 'PlaylistKeywordController@index');
                 Route::get('/{id}', 'PlaylistKeywordController@show');
                 Route::delete('/{id}', 'PlaylistKeywordController@destroy');
             });
-            
+
             Route::group(['prefix' => '/keywords'], function () {
                  Route::post('/', 'KeywordController@store');
                  Route::get('/', 'KeywordController@index');
@@ -168,7 +168,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::delete('/{id}', 'SongController@destroy');
                  Route::put('/{id}', 'SongController@update');
             });
-            
+
             Route::group(['prefix' => '/playlist_songs'], function () {
                  Route::post('/', 'PlaylistSongController@store');
                  Route::get('/', 'PlaylistSongController@index');
@@ -192,16 +192,16 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::delete('/{id}', 'SongArtistController@destroy');
                 //  Route::put('/{id}', 'PlaylistSongController@update');
             });
-            
-            
+
+
             Route::group(['prefix' => '/song_genre'], function () {
                  Route::post('/', 'SongGenreController@store');
                  Route::get('/', 'SongGenreController@index');
                  Route::get('/{id}', 'SongGenreController@show');
                  Route::delete('/{id}', 'SongGenreController@destroy');
                 //  Route::put('/{id}', 'PlaylistSongController@update');
-            }); 
-            
+            });
+
             Route::group(['prefix' => '/song_keyword'], function () {
                  Route::post('/', 'SongKeywordController@store');
                  Route::get('/', 'SongKeywordController@index');
@@ -258,8 +258,8 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/{id}', 'VideoKeywordController@show');
                  Route::delete('/{id}', 'VideoKeywordController@destroy');
                 //  Route::put('/{id}', 'VideoKeywordController@update');
-            }); 
-            
+            });
+
             Route::group(['prefix' => '/verified_users'], function () {
                  Route::post('/', 'VerifiedUserController@store');
                  Route::get('/', 'VerifiedUserController@index');

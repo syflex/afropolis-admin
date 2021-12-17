@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 // use App\Notifications\GeneralNotification;
 use App\Models\Follow;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
@@ -40,7 +40,8 @@ class FollowController extends Controller
     public function store(Request $request)
     {
         $checkStatus = Follow::where('user_id', '=', (Auth::user()->id))->where('follow_id', $request->id)->count();
-        $id = $request->user_id ? $request->user_id : Auth::user()->id;
+
+
         if (!$checkStatus) {
             $follow = new Follow([
                 'user_id' => Auth::user()->id,
@@ -55,7 +56,7 @@ class FollowController extends Controller
             $message = 'unfollowed';
         }
 
-        $user = auth()->user();
+        $user = Auth::user();
         $follow = User::where('id', $request->id)->first();
 
         $title = $message . ' Notification';
