@@ -268,6 +268,12 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 //  Route::put('/{id}', 'VideoKeywordController@update');
             });
 
+             Route::group(['prefix' => '/views'], function () {
+                 Route::post('/', 'ViewController@store');
+                 Route::get('/', 'ViewController@index');
+                 Route::get('/{id}', 'ViewController@show');
+            });
+
 
         });
 

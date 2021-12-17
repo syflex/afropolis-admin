@@ -54,6 +54,7 @@ class PostController extends Controller
             $post->title = $request->input('title');
             $post->description = $request->input('description');
             $post->video_url = $request->input('video');
+            $post->image_url = $request->input('image_url');
             $post->user_id = $user->id;
             $post->save();
 
@@ -124,6 +125,7 @@ class PostController extends Controller
             $post->title = $request->input('title');
             $post->description = $request->input('description');
             $post->video = $request->input('video');
+            $post->image_url = $request->input('image_url');
             $post->user_id = Auth::user()->id;
             $post->save();
 
