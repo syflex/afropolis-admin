@@ -48,7 +48,7 @@ class CommentController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'success',
-            'data' => $comment->load('user','likes','liked')->refresh()
+            'data' => $comment->load('user:id,name,avatar,email')->refresh()
         ]);
     }
 
