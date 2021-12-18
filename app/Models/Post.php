@@ -15,11 +15,7 @@ class Post extends Model
      * @var string[]
      */
     protected $fillable = [
-        'title',
-        'video',
-        'user_id',
-        'description',
-        'image_url',
+        'user_id','category_id','interest_id','title','description','video_url','image_url'
     ];
 
     /**
@@ -32,7 +28,7 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -64,6 +60,6 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class)->where('user_id', \Auth::user()->id);
     }
-    
+
 
 }
