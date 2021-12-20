@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FollowMail;
+use App\Notifications\FollowNotification;
 
 class FollowController extends Controller
 {
@@ -63,6 +66,14 @@ class FollowController extends Controller
         $content_title = $request->title;
         $body = 'You '. $message. ' ' .$follow->name;
         $user_data = $follow;
+
+        $notify = 
+
+           Mail::to($user)->send(new FollowMail($follow));
+            $title = 'Following Notification';
+            $body = 'New user is following You ';
+            $user->notify(new FollowNotification($user, $title, $body));
+
          // current user
         // $user->notify(new GeneralNotification($user, $title, $content_title, $body, $follow));
         // liked user

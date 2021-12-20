@@ -17,6 +17,7 @@ class CreateViewsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('video_id');
+            $table->string('viewable_type');
             $table->timestamps();
         });
     }

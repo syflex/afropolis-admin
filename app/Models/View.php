@@ -20,6 +20,7 @@ class View extends Model
     protected $fillable = [
         'user_id',
         'video_id',
+        'viewable_type',
     ];
 
      public function view()

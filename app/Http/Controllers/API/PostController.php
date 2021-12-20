@@ -82,8 +82,8 @@ class PostController extends Controller
     {
         try {
         $post = Post::findOrFail($id)
-        ->with('user')
-         ->with('comments')
+         ->with('user')
+         ->with('comments', 'comments.user')
          ->with('likes')
         ->get();
         if($post) return response()->json([
