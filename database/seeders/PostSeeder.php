@@ -14,7 +14,6 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        'user_id','category_id','interest_id','title','description','video_url','image_url'
         $post = new Post;
         $post->user_id = 1; //The official afropolis
         $post->category_id = 1;
