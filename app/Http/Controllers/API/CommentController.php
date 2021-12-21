@@ -8,6 +8,9 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CommentMail;
+use App\Notifications\CommentNotification;
 
 class CommentController extends Controller
 {
@@ -44,6 +47,16 @@ class CommentController extends Controller
         $inpute = $request->all();
         $inpute['user_id'] = Auth::user()->id;
         $comment = Comment::create($inpute);
+
+        // $user = User::where()
+
+        // $title ='New Comment';
+        // $body = 'Comment is '. ' ' .$request->content;
+
+        //    Mail::to($user)->send(new CommentMail($follow));
+        //     $title = 'comment Notification';
+        //     $body = 'New user is following You ';
+        //     $user->notify(new CommentNotification($user, $title, $body));
 
         return response()->json([
             'status' => 'success',

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PostMail;
+use App\Notifications\PostNotification;
 
 class PostController extends Controller
 {
@@ -57,6 +61,13 @@ class PostController extends Controller
             $post->image_url = $request->input('image_url');
             $post->user_id = $user->id;
             $post->save();
+
+            $users = Follow::where('follow_id', $user->id)->where('type', 'post')->get();
+            $title ='New Post from';
+
+            Mail::to($user)->send(new PostMail($users));
+            $body = 'New post alert ';
+            $user->notify(new PostNotification($users, $title, $body));
 
             return response()->json([
                 'post' => $post,
