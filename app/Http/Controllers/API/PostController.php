@@ -63,9 +63,9 @@ class PostController extends Controller
             $post->save();
 
             $users = Follow::where('follow_id', $user->id)->where('type', 'post')->get();
-            $title ='New Post from';
+            $title ='New Post from'. $user->name;
 
-            Mail::to($user)->send(new PostMail($users));
+            Mail::to($users)->send(new PostMail($users));
             $body = 'New post alert ';
             $user->notify(new PostNotification($users, $title, $body));
 
