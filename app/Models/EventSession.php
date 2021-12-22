@@ -13,7 +13,7 @@ class EventSession extends Model
 
 
       protected $fillable = [
-        'start','end','price','discount','title','event_id', 'time'
+        'start','end','price','discount','title','event_id', 'time', 'session'
     ];
 
     public function event_session()
