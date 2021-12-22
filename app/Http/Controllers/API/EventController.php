@@ -29,6 +29,7 @@ class EventController extends Controller
     {
         $events = Events::with('event_session')
         ->with('event_location')
+        ->with('user')
         ->get();
         return response()->json([
             'data' => $events,
@@ -98,9 +99,10 @@ class EventController extends Controller
     public function show($id)
     {
         try {
-        $event = Events::findOrFail($id)
+        $event = Events::where('id',$id)
         ->with('event_session')
         ->with('event_location')
+        ->with('user')
         ->get();
         if($event) return response()->json([
             'data' => $event,
@@ -209,10 +211,14 @@ class EventController extends Controller
      */
     public function userEvents ()
     {
-         $event = Events::where('user_id', Auth::user()->id)->get();
+         $event = Events::where('user_id', Auth::user()->id)
+          ->with('event_session')
+          ->with('event_location')
+         ->with('user')->get();
         return response()->json([
             'status' => 'success',
-            'data' => $event
+            'data' => $event,
+            'message'=> 'Fetched successfully'
         ]);
     }
 }

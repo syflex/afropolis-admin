@@ -35,4 +35,9 @@ class Events extends Model
         return $this->hasMany(EventLocation::class, 'event_id');
     }
 
+     public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

@@ -97,4 +97,9 @@ class User extends Authenticatable
         return $this->hasOne(VerifiedUser::class);
     }
 
+
+     public function event()
+    {
+        return $this->hasMany(Events::class);
+    }
 }
