@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Doctrine\Common\EventSubscriber;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 
 class EventController extends Controller
 {
@@ -50,10 +53,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+       $current_date_time = Carbon::now()->toDateTimeString(); // Produces something like "2019-03-11 12:25:00"
 
         $user = Auth::user();
         $input = $request->all();
         $input['user_id'] = $user->id;
+        $input['slug'] = Str::slug($request->title.'-'.$current_date_time);
         $event = Events::create($input);
         
         $input['event_id'] = $event->id;
