@@ -9,7 +9,15 @@ class EventSession extends Model
 {
     use HasFactory;
 
+        protected $table = 'event_sessions';
+
+
       protected $fillable = [
-        'start','end','price','discount','title','event_id',
+        'start','end','price','discount','title','event_id', 'time'
     ];
+
+    public function event_session()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

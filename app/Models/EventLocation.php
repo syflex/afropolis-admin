@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class EventLocation extends Model
 {
     use HasFactory;
+    protected $table = 'event_locations';
+
 
     protected $fillable = [
         'address',
@@ -15,4 +17,9 @@ class EventLocation extends Model
         'city_id',
         'event_id',
     ];
+
+     public function event_location()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

@@ -27,12 +27,14 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Events::all();
+        $events = Events::with('event_session')
+        ->with('event_location')
+        ->get();
         return response()->json([
             'data' => $events,
             'status' => 'success',
             'message' => 'Events retrieved successfully'
-        ], 200);
+        ]);
     }
 
     /**
@@ -72,7 +74,10 @@ class EventController extends Controller
              'end' => $request->end,
              'price' => $request->price,
              'discount' => $request->discount,
+             'time' => $request->time
          ]);
+
+         
         //  $event_session = EventSession::create($request->session());
         // $event_subscribers = EventAttendee::create($request->subscribers());
         // $event_subscription =EventSubscribers::create($request->subscription());
@@ -93,12 +98,15 @@ class EventController extends Controller
     public function show($id)
     {
         try {
-        $event = Events::findOrFail($id);
+        $event = Events::findOrFail($id)
+        ->with('event_session')
+        ->with('event_location')
+        ->get();
         if($event) return response()->json([
             'data' => $event,
             'status' => true,
             'message' => 'event retrieved successfully'
-        ], 200);
+        ]);
         }
          catch(\Exception $e){
             return response()->json([
