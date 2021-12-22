@@ -74,6 +74,7 @@ class EventController extends Controller
              'start' => $request->start,
              'end' => $request->end,
              'price' => $request->price,
+             'session' => $request->session,
              'discount' => $request->discount,
              'time' => $request->time
          ]);

@@ -27,6 +27,7 @@ class CreateEventSessionsTable extends Migration
             $table->string('time');
             $table->string('price');
             $table->string('discount');
+            $table->string('session');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->timestamps();
         });
