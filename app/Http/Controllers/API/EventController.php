@@ -60,10 +60,20 @@ class EventController extends Controller
         $input['user_id'] = $user->id;
         $input['slug'] = Str::slug($request->title.'-'.$current_date_time);
         $event = Events::create($input);
-        
+        \print_r($event->id);
         $input['event_id'] = $event->id;
-        $event_location = EventLocation::create($input);
-        // $event_session = EventSession::create($request->session());
+
+        $eventId = $event->id;
+         $event_location = EventLocation::create($input);
+         $event_session = EventSession::create([
+             'event_id' => $eventId,
+             'title' => $request->title,
+             'start' => $request->start,
+             'end' => $request->end,
+             'price' => $request->price,
+             'discount' => $request->discount,
+         ]);
+        //  $event_session = EventSession::create($request->session());
         // $event_subscribers = EventAttendee::create($request->subscribers());
         // $event_subscription =EventSubscribers::create($request->subscription());
 
