@@ -33,5 +33,9 @@ class EventSubscription extends Model
       return $this->belongsTo(Event::class);
     }
 
+        public function subscribe()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

@@ -107,4 +107,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class, 'likeable_id');
     }
+
+      public function eventSubscription()
+    {
+        return $this->hasMany(EventSubscription::class);
+    }
 }
