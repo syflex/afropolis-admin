@@ -19,6 +19,7 @@ class VideoController extends Controller
     {
           $videos = Video::with('view')
           ->with('like')
+          ->with('category')
            ->with('user')
           ->get();
 
@@ -72,6 +73,7 @@ class VideoController extends Controller
         //get a video
         $video = Video::find($id)->with('view')
         ->with('like')
+        ->with('category')
         ->with('user')
         ->get();
         return response()->json([
