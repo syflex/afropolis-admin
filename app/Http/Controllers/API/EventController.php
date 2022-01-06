@@ -63,7 +63,6 @@ class EventController extends Controller
         $input['user_id'] = $user->id;
         $input['slug'] = Str::slug($request->title.'-'.$current_date_time);
         $event = Events::create($input);
-        \print_r($event->id);
         $input['event_id'] = $event->id;
 
         $eventId = $event->id;
@@ -139,38 +138,39 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'title' => 'required|string|min:4',
-        // ]);
+        // $current_date_time = Carbon::now()->toDateTimeString(); // Produces something like "2019-03-11 12:25:00"
+        // $user = Auth::user();
+        // $input = $request->all();
+        // // $input['user_id'] = $user->id;
+        // $input['slug'] = Str::slug($request->title.'-'.$current_date_time);
+        
         // try {
         //     $event = Events::findOrFail($id);
-        //     $event->title = $request->input('title');
-        //     $event->about = $request->input('about');
-        //     $event->description = $request->input('description');
-        //     $event->price = $request->input('price');
-        //     $event->eventType = $request->input('eventType');
-        //     $event->discount = $request->input('discount');
-        //     $event->start = $request->input('start');
-        //     $event->end = $request->input('end');
-        //     $event->city = $request->input('city');
-        //     $event->country = $request->input('country');
-        //     $event->address = $request->input('address');
-        //     $event->time = $request->input('time');
-        //     $event->session = $request->input('session');
-        //     // $event->multiple = $request->input('multiple');
-        //     $event->video = $request->input('video');
-        //     $event->save();
+        //     $event->update($input);
+        //     // $input['event_id'] = $event->id;
+        //     $eventId = $event->id;
+        //     $event->update($input);
+        //  $event->update([
+        //     //  'event_id' => $eventId,
+        //      'title' => $request->title,
+        //      'start' => $request->start,
+        //      'end' => $request->end,
+        //      'price' => $request->price,
+        //      'session' => $request->session,
+        //      'discount' => $request->discount,
+        //      'time' => $request->time
+        //  ]);
 
+        
+        // return response()->json([
+        //     'message' => 'Event updated successfully',
+        //     'data' => $event,
+        //     'status' => true
+        // ], 201);
+        // } catch (\Throwable $e) {
         //     return response()->json([
-        //         'data' => $event,
-        //         'message' => 'Event updated successfully',
+        //         'message' => 'Something went wrong'.$e,
         //         'status' => true
-        //     ], 201);
-
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'message' => 'Event creation Failed!',
-        //         'status' => false
         //     ], 500);
         // }
     }

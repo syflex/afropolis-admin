@@ -102,4 +102,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Events::class);
     }
+
+      public function like()
+    {
+        return $this->hasMany(Like::class, 'likeable_id');
+    }
 }

@@ -9,8 +9,7 @@ class EventSession extends Model
 {
     use HasFactory;
 
-        protected $table = 'event_sessions';
-
+    protected $table = 'event_sessions';
 
       protected $fillable = [
         'start','end','price','discount','title','event_id', 'time', 'session'

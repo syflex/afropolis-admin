@@ -57,4 +57,14 @@ class Video extends Model
         return $this->hasMany(View::class);
     }
 
+      public function like()
+    {
+        return $this->hasMany(Like::class, 'likeable_id');
+    }
+
+      public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
