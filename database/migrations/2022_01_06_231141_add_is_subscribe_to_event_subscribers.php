@@ -14,7 +14,7 @@ class AddIsSubscribeToEventSubscribers extends Migration
     public function up()
     {
         Schema::table('event_subscribers', function (Blueprint $table) {
-                        $table->boolean('isSubscribe');
+            $table->boolean('isSubscribe');
         });
     }
 
