@@ -13,7 +13,7 @@ class EventSubscription extends Model
      *
      * @var string
      */
-    protected $table = 'event_subscribes';
+    protected $table = 'event_subscribers';
 
     /**
      * The attributes that are mass assignable.
