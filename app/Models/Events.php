@@ -21,7 +21,7 @@ class Events extends Model
 
      public function eventSubscription()
     {
-        return $this->hasMany(EventSubscription::class, 'event_id');
+        return $this->hasMany(EventSubscription::class, 'event_id')->select(['event_id','email', 'user_id', 'id']);;
     }
 
 
