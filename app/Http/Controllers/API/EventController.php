@@ -29,6 +29,7 @@ class EventController extends Controller
     {
         $events = Events::with('event_session')
         ->with('event_location')
+        ->with('eventSubscription')
         ->with('user')
         ->get();
         return response()->json([
@@ -102,6 +103,7 @@ class EventController extends Controller
         $event = Events::where('id',$id)
         ->with('event_session')
         ->with('event_location')
+        ->with('eventSubscription')
         ->with('user')
         ->get();
         if($event) return response()->json([
