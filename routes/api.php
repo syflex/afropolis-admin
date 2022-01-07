@@ -142,7 +142,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             });
 
              Route::group(['prefix' => '/subscribes'], function () {
-                 Route::post('/', 'EventSubscriptionController@store');
+                 Route::post('/create', 'EventSubscriptionController@store');
                  Route::get('/', 'EventSubscriptionController@index');
             });
 
