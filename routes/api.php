@@ -116,6 +116,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::post('/', 'AlbumController@store');
                 Route::get('/', 'AlbumController@index');
                 Route::get('/{id}', 'AlbumController@show');
+                Route::put('/{id}', 'AlbumController@update');
                 Route::delete('/{id}', 'AlbumController@destroy');
             });
 

@@ -83,7 +83,14 @@ class AlbumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $album = Albums::findOrFail($id);
+        $album->update($input);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'update successfully',
+            'data' => $album
+        ]);
     }
 
     /**
