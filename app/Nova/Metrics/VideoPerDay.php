@@ -4,7 +4,7 @@ namespace App\Nova\Metrics;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
-use App\Models\Videos;
+use App\Models\Video;
 
 class VideoPerDay extends Trend
 {
@@ -16,7 +16,7 @@ class VideoPerDay extends Trend
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->countByDays($request, Videos::class);
+        return $this->countByDays($request, Video::class);
     }
 
     /**
