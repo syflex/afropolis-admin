@@ -64,11 +64,19 @@ class AuthController extends Controller
 
             $user = User::create($input);
 
+            
+        try {
+            //code...
+
             // Mail::to($user)->send(new WelcomeMail($user));
 
             $title = 'Signup Notification';
             $body = 'Welcome to Afropolis ';
             $user->notify(new AuthNotification($user, $title, $body));
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->token;
