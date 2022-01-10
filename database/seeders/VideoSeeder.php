@@ -19,6 +19,7 @@ class VideoSeeder extends Seeder
         $post->category_id = 1;
         $post->interest_id = 1;
         $post->title = 'Welcome to afropolis!';
+        $post->sub_title = 'Welcome to afropolis!';
         $post->video_url = '1.mp4';
         $post->image_url = '1.jpg';
         $post->save();
@@ -27,7 +28,8 @@ class VideoSeeder extends Seeder
         $post->user_id = 2; //The official afropolis
         $post->category_id = 2;
         $post->interest_id = 1;
-        $post->title = 'Welcome to afropolis!';
+        $post->title = 'Dance Video';
+        $post->sub_title = 'The afropolis dance video!';
         $post->video_url = '2.mp4';
         $post->image_url = '2.jpg';
         $post->save();
@@ -36,7 +38,8 @@ class VideoSeeder extends Seeder
         $post->user_id = 2; //The official afropolis
         $post->category_id = 1;
         $post->interest_id = 1;
-        $post->title = 'Welcome to afropolis!';
+        $post->title = 'Crump Video!';
+        $post->sub_title = 'The afropolis crump video!';
         $post->video_url = '3.mp4';
         $post->image_url = '3.jpg';
         $post->save();
@@ -45,7 +48,8 @@ class VideoSeeder extends Seeder
         $post->user_id = 2; //The official afropolis
         $post->category_id = 2;
         $post->interest_id = 1;
-        $post->title = 'Welcome to afropolis!';
+        $post->title = 'Song Video';
+        $post->sub_title = 'The afropolis song video!';
         $post->video_url = '4.mp4';
         $post->image_url = '4.jpg';
         $post->save();

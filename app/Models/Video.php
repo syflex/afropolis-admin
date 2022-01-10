@@ -24,11 +24,14 @@ class Video extends Model
      */
     protected $fillable = [
         'title',
-         'year',
+        'year',
         'image_url',
         'video_url',
         'description',
-        'user_id'
+        'user_id',
+        'category_id',
+        'interest_id',
+        'sub_title',
     ];
 
     public function videoCategory()
