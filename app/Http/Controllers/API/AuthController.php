@@ -164,7 +164,7 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        $user = User::with('followers')
+        $user = User::with('followers','interest')
             //  ->with('userInterest')
         ->where('id', Auth::user()->id)->first();
         return response()->json([
