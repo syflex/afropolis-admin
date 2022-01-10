@@ -66,8 +66,8 @@ class PostController extends Controller
             $title ='New Post from'. $user->name;
 
             // Mail::to($users)->send(new PostMail($users));
-            $body = 'New post alert ';
-            $user->notify(new PostNotification($users, $title, $body));
+            // $body = 'New post alert ';
+            // $user->notify(new PostNotification($users, $title, $body));
 
             return response()->json([
                 'post' => $post,

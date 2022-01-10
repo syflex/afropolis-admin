@@ -68,9 +68,9 @@ class FollowController extends Controller
         $user_data = $follow;
 
         //    Mail::to($user)->send(new FollowMail($follow));
-            $title = 'Following Notification';
-            $body = 'New user is following You ';
-            $user->notify(new FollowNotification($user, $title, $body));
+            // $title = 'Following Notification';
+            // $body = 'New user is following You ';
+            // $user->notify(new FollowNotification($user, $title, $body));
 
          // current user
         // $user->notify(new GeneralNotification($user, $title, $content_title, $body, $follow));
