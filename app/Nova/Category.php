@@ -5,6 +5,8 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 
 class Category extends Resource
 {
@@ -14,6 +16,13 @@ class Category extends Resource
      * @var string
      */
     public static $model = \App\Models\Category::class;
+
+     /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'Admin';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -41,6 +50,10 @@ class Category extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make('name')
+            ->sortable()
+            ->rules('required', 'max:255'),
+            Textarea::make('description'),
         ];
     }
 

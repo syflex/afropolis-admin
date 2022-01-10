@@ -18,6 +18,8 @@ class Interest extends Model
         'name','description','avatar','is_featured'
     ];
 
+    protected $table = 'interest';
+
 
      public function videoCategory()
     {
@@ -29,5 +31,5 @@ class Interest extends Model
         return $this->hasMany(VideoInterest::class);
     }
 
-    
+
 }
