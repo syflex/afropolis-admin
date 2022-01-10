@@ -64,7 +64,7 @@ class AuthController extends Controller
 
             $user = User::create($input);
 
-            Mail::to($user)->send(new WelcomeMail($user));
+            // Mail::to($user)->send(new WelcomeMail($user));
 
             $title = 'Signup Notification';
             $body = 'Welcome to Afropolis ';
@@ -279,7 +279,7 @@ class AuthController extends Controller
         return response()->json(['error' => 'Not found'], 404);
 
     }
-    
+
     public function avatar(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
