@@ -31,7 +31,7 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->select(['email', 'name', 'id','avatar', 'cover', 'slug', 'phone' ,'active']);
     }
 
    public function comments()
