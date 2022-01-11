@@ -15,31 +15,24 @@ class CollectionSeeder extends Seeder
     public function run()
     {
         $collection = new Collection;
-        $collection->user_id = 1; 
-        $collection->name = "testing collection";
+        $collection->user_id = 2;
+        $collection->name = "Testing collection";
         $collection->description = "the official afropolis";
-        $collection->image = '1.jpg';
+        $collection->image = 'room1.jpeg';
         $collection->save();
 
         $collection = new Collection;
-        $collection->user_id = 1; 
-        $collection->name = "testing";
-        $collection->description = "the official afropolis";
-        $collection->image = '2.jpg';
+        $collection->user_id = 2;
+        $collection->name = "The Dance Collectiom";
+        $collection->description = "The Dance Collectiom description";
+        $collection->image = 'room1.jpeg';
         $collection->save();
 
         $collection = new Collection;
-        $collection->user_id = 1; 
-        $collection->name = "teser";
-        $collection->description = "the official afropolis";
-        $collection->image = '2.jpg';
-        $collection->save();
-
-        $collection = new Collection;
-        $collection->user_id = 1; 
-        $collection->name = "test";
-        $collection->description = "the official afropolis";
-        $collection->image = '3.jpg';
+        $collection->user_id = 2;
+        $collection->name = "Crump Collection";
+        $collection->description = "Crump Collection description";
+        $collection->image = 'room1.jpeg';
         $collection->save();
     }
 }

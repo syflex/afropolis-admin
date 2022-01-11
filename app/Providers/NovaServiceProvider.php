@@ -68,7 +68,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             // new Help,
             new NewUsers,
             new UsersPerDay,
-            new UsersPerPlan,
+            // new UsersPerPlan,
             new NewPosts,
             new PostPerDay,
             new NewVideos,

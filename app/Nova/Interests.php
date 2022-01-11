@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
-
+use Laravel\Nova\Fields\Textarea;
 class Interests extends Resource
 {
     /**
@@ -52,6 +52,7 @@ class Interests extends Resource
             Text::make('name')
             ->sortable()
             ->rules('required', 'max:255'),
+            Textarea::make('description'),
         ];
     }
 

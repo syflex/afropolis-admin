@@ -4,7 +4,7 @@ namespace App\Nova\Metrics;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Value;
-use App\Models\Videos;
+use App\Models\Video;
 
 class NewVideos extends Value
 {
@@ -16,7 +16,7 @@ class NewVideos extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Videos::class);
+        return $this->count($request, Video::class);
     }
 
     /**

@@ -64,11 +64,19 @@ class AuthController extends Controller
 
             $user = User::create($input);
 
-            Mail::to($user)->send(new WelcomeMail($user));
 
-            $title = 'Signup Notification';
-            $body = 'Welcome to Afropolis ';
-            $user->notify(new AuthNotification($user, $title, $body));
+        try {
+            //code...
+
+            // Mail::to($user)->send(new WelcomeMail($user));
+
+            // $title = 'Signup Notification';
+            // $body = 'Welcome to Afropolis ';
+            // $user->notify(new AuthNotification($user, $title, $body));
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->token;
@@ -156,7 +164,7 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        $user = User::with('followers')
+        $user = User::with('followers','interest')
             //  ->with('userInterest')
         ->where('id', Auth::user()->id)->first();
         return response()->json([
@@ -279,7 +287,7 @@ class AuthController extends Controller
         return response()->json(['error' => 'Not found'], 404);
 
     }
-    
+
     public function avatar(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
