@@ -37,7 +37,7 @@ class Events extends Model
 
      public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id')->select(['email', 'name', 'id','avatar', 'cover', 'slug', 'phone' ,'active']);
     }
 
 }
