@@ -8,6 +8,7 @@ use App\Models\Interest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\UserInterest;
 
 class InterestController extends Controller
 {
@@ -44,30 +45,30 @@ class InterestController extends Controller
      */
     public function store(Request $request)
     {
-         //
-         $this->validate($request, [
-            'interest' => 'required|string|unique:interests'
-        ]);
+        //  //
+        //  $this->validate($request, [
+        //     'id' => 'required|string|unique:interests'
+        // ]);
 
-        // $user = Auth::user()->id;
+        // $user = Auth::user();
 
-        try {
-            $interest = new Interest;
-            $interest->interest = $request->input('interest');
-            // $interest->user_id = $user;
-            $interest->save();
+        // try {
+        //     $interest = new UserInterest();
+        //     $interest->interest = $request->input('interest');
+        //     // $interest->user_id = $user;
+        //     $interest->save();
 
-            return response()->json([
-                'data' => $interest,
-                'status' => true,
-                'message' => 'Interest created successfully'
-            ], 201);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'interest creation Failed!'.$e,
-                'status' => false
-            ], 500);
-        }
+        //     return response()->json([
+        //         'data' => $interest,
+        //         'status' => true,
+        //         'message' => 'Interest created successfully'
+        //     ], 201);
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'error' => 'interest creation Failed!'.$e,
+        //         'status' => false
+        //     ], 500);
+        // }
     }
 
     /**
@@ -79,12 +80,13 @@ class InterestController extends Controller
     public function show($id)
     {
        try {
-       $interest = Interest::findOrFail($id);
-         if($interest) return response()->json([
-             'data' => $interest,
-             'status' => true,
-             'message' => 'interest retrived'
-            ], 200);
+            $interest = Interest::findOrFail($id);
+
+            return response()->json([
+                'data' => $interest,
+                'status' => true,
+                'message' => 'interest retrived'
+            ]);
         }
          catch(\Exception $e){
             return response()->json(['error' => 'not found'], 500);
@@ -145,6 +147,49 @@ class InterestController extends Controller
         catch(\Exception $e){
             return response()->json(['error' => 'not found went', 'status' => false], 500);
 
+        }
+    }
+
+    public function getInterests()
+    {
+        $interests = Interest::all();
+        return response()->json([
+            'data' => $interests,
+            'status' => true,
+            'message' => 'interest retrieved'
+        ]);
+    }
+
+    // add UserInterest
+    public function addRemoveUserInterest($interest_id)
+    {
+        $user = Auth::user();
+        try {
+
+            $interest = UserInterest::where('interest_id', $interest_id)->where('user_id', $user->id)->first();
+
+            if ($interest) {
+                // remove UserInterest
+                $interest->delete();
+            }
+
+            $user = Auth::user();
+            $userInterest = new UserInterest();
+            $userInterest->interest_id = $interest_id;
+            $userInterest->user_id = $user->id;
+            $userInterest->save();
+
+            return response()->json([
+                'data' => $userInterest,
+                'status' => true,
+                'message' => 'Interest successfully '.$interest ? 'removed' : 'added'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'interest creation Failed!'.$e,
+                'status' => false
+            ], 500);
         }
     }
 }

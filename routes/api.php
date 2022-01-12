@@ -82,10 +82,10 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
 
             Route::group(['prefix' => '/interests'], function () {
                     Route::post('/', 'InterestController@store');
-                    Route::put('/{id}', 'InterestController@update');
-                    Route::get('/', 'InterestController@index');
-                    Route::get('/{id}', 'InterestController@show');
-                    Route::delete('/{id}', 'InterestController@destroy');
+                    // Route::put('/{id}', 'InterestController@update');
+                    Route::get('/{interest_id}', 'InterestController@addRemoveUserInterest');
+                    // Route::get('/{id}', 'InterestController@show');
+                    // Route::delete('/{id}', 'InterestController@destroy');
             });
 
             Route::group(['prefix' => '/comments'], function () {

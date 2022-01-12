@@ -31,5 +31,4 @@ class Interest extends Model
         return $this->hasMany(VideoInterest::class);
     }
 
-
 }
