@@ -21,7 +21,7 @@ class Events extends Model
 
      public function eventSubscription()
     {
-        return $this->hasMany(EventSubscription::class, 'event_id')->select(['event_id','email', 'user_id', 'id']);;
+        return $this->hasMany(EventSubscription::class, 'event_id')->select(['event_id','email', 'user_id', 'id']);
     }
 
 
@@ -37,7 +37,7 @@ class Events extends Model
 
      public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id')->select(['email', 'name', 'id','avatar', 'cover', 'slug', 'phone' ,'active']);
     }
 
 }
