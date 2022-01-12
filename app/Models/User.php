@@ -78,7 +78,7 @@ class User extends Authenticatable
 
      public function interest()
     {
-        return $this->hasMany(UserInterest::class,'interest_id');
+        return $this->hasMany(UserInterest::class,);
     }
 
     public function collections()
