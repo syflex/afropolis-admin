@@ -150,17 +150,7 @@ class InterestController extends Controller
         }
     }
 
-    public function getInterests()
-    {
-        $interests = Interest::all();
-        return response()->json([
-            'data' => $interests,
-            'status' => true,
-            'message' => 'interest retrieved'
-        ]);
-    }
 
-    // add UserInterest
     public function addRemoveUserInterest($interest_id)
     {
         $user = Auth::user();
@@ -169,18 +159,16 @@ class InterestController extends Controller
             $interest = UserInterest::where('interest_id', $interest_id)->where('user_id', $user->id)->first();
 
             if ($interest) {
-                // remove UserInterest
                 $interest->delete();
+            }else {
+                $user = Auth::user();
+                $userInterest = new UserInterest();
+                $userInterest->interest_id = $interest_id;
+                $userInterest->user_id = $user->id;
+                $userInterest->save();
             }
 
-            $user = Auth::user();
-            $userInterest = new UserInterest();
-            $userInterest->interest_id = $interest_id;
-            $userInterest->user_id = $user->id;
-            $userInterest->save();
-
             return response()->json([
-                'data' => $userInterest,
                 'status' => true,
                 'message' => 'Interest successfully '.$interest ? 'removed' : 'added'
             ]);
