@@ -84,10 +84,11 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
 
             Route::group(['prefix' => '/interests'], function () {
                     Route::post('/', 'InterestController@store');
-                    // Route::put('/{id}', 'InterestController@update');
+                    Route::put('/{id}', 'InterestController@update');
+                    Route::get('/', 'InterestController@index');
+                    Route::get('/{id}', 'InterestController@show');
+                    Route::delete('/{id}', 'InterestController@destroy');
                     Route::get('/{interest_id}', 'InterestController@addRemoveUserInterest');
-                    // Route::get('/{id}', 'InterestController@show');
-                    // Route::delete('/{id}', 'InterestController@destroy');
             });
 
             Route::group(['prefix' => '/comments'], function () {
@@ -131,9 +132,9 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
 
             Route::group(['prefix' => '/userInterest'], function () {
                 Route::post('/', 'UserInterestController@store');
-                // Route::get('/', 'UserInterestController@index');
-                // Route::get('/{id}', 'UserInterestController@show');
-                // Route::delete('/{id}', 'UserInterestController@destroy');
+                Route::get('/', 'UserInterestController@index');
+                Route::get('/{id}', 'UserInterestController@show');
+                Route::delete('/{id}', 'UserInterestController@destroy');
             });
 
             Route::group(['prefix' => '/playlists'], function () {

@@ -45,30 +45,30 @@ class InterestController extends Controller
      */
     public function store(Request $request)
     {
-        //  //
-        //  $this->validate($request, [
-        //     'id' => 'required|string|unique:interests'
-        // ]);
+         //
+         $this->validate($request, [
+            'id' => 'required|string|unique:interests'
+        ]);
 
-        // $user = Auth::user();
+        $user = Auth::user();
 
-        // try {
-        //     $interest = new UserInterest();
-        //     $interest->interest = $request->input('interest');
-        //     // $interest->user_id = $user;
-        //     $interest->save();
+        try {
+            $interest = new UserInterest();
+            $interest->interest = $request->input('interest');
+            // $interest->user_id = $user;
+            $interest->save();
 
-        //     return response()->json([
-        //         'data' => $interest,
-        //         'status' => true,
-        //         'message' => 'Interest created successfully'
-        //     ], 201);
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'error' => 'interest creation Failed!'.$e,
-        //         'status' => false
-        //     ], 500);
-        // }
+            return response()->json([
+                'data' => $interest,
+                'status' => true,
+                'message' => 'Interest created successfully'
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'interest creation Failed!'.$e,
+                'status' => false
+            ], 500);
+        }
     }
 
     /**
