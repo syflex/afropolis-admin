@@ -203,4 +203,18 @@ class PostController extends Controller
             'data' => $posts
         ]);
     }
+
+     // user post by is id
+    public function userPostsById ($id)
+    {
+         $posts = Post::with('comments')
+         ->with('likes')
+         ->where('user_id', $id)
+         ->get();
+        return response()->json([
+            'status' => 'success',
+            'message'=> 'Post fetched',
+            'data' => $posts
+        ]);
+    }
 }

@@ -224,4 +224,20 @@ class EventController extends Controller
             'message'=> 'Fetched successfully'
         ]);
     }
+
+    /**
+     * fetch user events by is id
+     */
+    public function getUserEventById ($id)
+    {
+         $event = Events::where('user_id', $id)
+          ->with('event_session')
+          ->with('event_location')
+         ->with('user')->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $event,
+            'message'=> 'Fetched successfully'
+        ]);
+    }
 }

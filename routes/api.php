@@ -68,6 +68,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                     Route::get('/', 'EventController@index');
                     Route::get('/{id}', 'EventController@show');
                     Route::get('/user/events', 'EventController@userEvents');
+                    Route::get('/user/events/{id}', 'EventController@getUserEventById');
                     Route::delete('/{id}', 'EventController@destroy');
             });
 
@@ -76,6 +77,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                     Route::put('/{id}', 'PostController@update');
                     Route::get('/all', 'PostController@index');
                     Route::get('/user/post', 'PostController@userPosts');
+                    Route::get('/user/post/{id}', 'PostController@userPostsById');
                     Route::get('/{id}', 'PostController@show');
                     Route::delete('/{id}', 'PostController@destroy');
             });
