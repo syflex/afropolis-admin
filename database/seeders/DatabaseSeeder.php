@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InterestSeeder::class);
         $this->call(PostSeeder::class);
         $this->call(VideoSeeder::class);
+        $this->call(CollectionSeeder::class);
         // $this->call(SubscriptionTypesTableSeeder::class);
         // $this->call(WithdrawableTableSeeder::class);
         // $this->call(BankTableSeeder::class);
