@@ -18,21 +18,21 @@ class CollectionSeeder extends Seeder
         $collection->user_id = 2;
         $collection->name = "Testing collection";
         $collection->description = "the official afropolis";
-        $collection->image_url = 'room1.jpeg';
+        $collection->image_url = 'room/collections/2/room1.jpeg';
         $collection->save();
 
         $collection = new Collection;
         $collection->user_id = 2;
         $collection->name = "The Dance Collectiom";
         $collection->description = "The Dance Collectiom description";
-        $collection->image_url = 'room1.jpeg';
+        $collection->image_url = 'room/collections/2/room1.jpeg';
         $collection->save();
 
         $collection = new Collection;
         $collection->user_id = 2;
         $collection->name = "Crump Collection";
         $collection->description = "Crump Collection description";
-        $collection->image_url = 'room1.jpeg';
+        $collection->image_url = 'room/collections/2/room1.jpeg';
         $collection->save();
     }
 }
