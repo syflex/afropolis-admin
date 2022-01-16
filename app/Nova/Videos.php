@@ -57,10 +57,10 @@ class Videos extends Resource
             Text::make(__('Year'), 'year')->sortable(),
             File::make(__('Video'), 'video_url')
                 ->disk('s3')->disableDownload()
-                ->path('rooms/video/'.$request->user()->id),
+                ->path('rooms/video/video'),
             File::make(__('Cover Image'), 'image_url')
                 ->disk('s3')->disableDownload()
-                ->path('rooms/video/'.$request->user()->id),
+                ->path('rooms/video/cover'),
             Textarea::make(__('Description'), 'description')->sortable(),
             BelongsTo::make('Users', 'User', 'App\Nova\User'),
             BelongsTo::make('Category', 'Category', 'App\Nova\Category'),

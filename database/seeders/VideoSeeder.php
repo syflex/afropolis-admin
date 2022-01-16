@@ -20,8 +20,8 @@ class VideoSeeder extends Seeder
         $post->interest_id = 1;
         $post->title = 'Welcome to afropolis!';
         $post->sub_title = 'Welcome to afropolis!';
-        $post->video_url = '1.mp4';
-        $post->image_url = '1.jpg';
+        $post->video_url = 'rooms/video/video/1.mp4';
+        $post->image_url = 'rooms/video/cover/1.jpg';
         $post->save();
 
         $post = new Video;
@@ -30,8 +30,8 @@ class VideoSeeder extends Seeder
         $post->interest_id = 1;
         $post->title = 'Dance Video';
         $post->sub_title = 'The afropolis dance video!';
-        $post->video_url = '2.mp4';
-        $post->image_url = '2.jpg';
+        $post->video_url = 'rooms/video/video/2.mp4';
+        $post->image_url = 'rooms/video/cover/2.jpg';
         $post->save();
 
         $post = new Video;
@@ -40,8 +40,8 @@ class VideoSeeder extends Seeder
         $post->interest_id = 1;
         $post->title = 'Crump Video!';
         $post->sub_title = 'The afropolis crump video!';
-        $post->video_url = '3.mp4';
-        $post->image_url = '3.jpg';
+        $post->video_url = 'rooms/video/video/3.mp4';
+        $post->image_url = 'rooms/video/cover/3.jpg';
         $post->save();
 
         $post = new Video;
@@ -50,8 +50,8 @@ class VideoSeeder extends Seeder
         $post->interest_id = 1;
         $post->title = 'Song Video';
         $post->sub_title = 'The afropolis song video!';
-        $post->video_url = '4.mp4';
-        $post->image_url = '4.jpg';
+        $post->video_url = 'rooms/video/video/4.mp4';
+        $post->image_url = 'rooms/video/cover/4.jpg';
         $post->save();
     }
 }
