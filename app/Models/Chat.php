@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Playlists extends Model
+class Chat extends Model
 {
     use HasFactory;
 
@@ -15,21 +15,11 @@ class Playlists extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_id','name','image_url','description'
+        'user_id','message','receiver_id','read_at'
     ];
 
-     public function playlists()
-    {
-        return $this->hasMany(PlaylistKeyword::class);
-    }
-
-      public function playlistSong()
-    {
-        return $this->hasMany(PlaylistSong::class);
-    }
-
     /**
-     * Get the user that owns the Playlists
+     * Get the user that owns the Chat
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -37,5 +27,4 @@ class Playlists extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

@@ -19,7 +19,7 @@ class Collection extends Model
         'name',
         'slug',
         'description',
-        'image',
+        'image_url',
     ];
 
     /**

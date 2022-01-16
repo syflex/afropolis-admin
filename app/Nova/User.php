@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
@@ -58,11 +60,15 @@ class User extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
+            Text::make('slug')->sortable(),
+
             Text::make('Email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:user,email')
                 ->updateRules('unique:user,email,{{resourceId}}'),
+
+            Boolean::make('email_verified_at'),
 
             Password::make(__('Password'), 'password')
                 ->onlyOnForms()
@@ -73,8 +79,14 @@ class User extends Resource
                 ->sortable()
                 ->rules('max:255'),
 
-            Text::make(__('Active'), 'active')
+            Boolean::make(__('Active'), 'active')
                 ->sortable(),
+
+            DateTime::make(__('Banned Untill'), 'banned_untill'),
+
+            Text::make(__('Last Login'), 'last_login'),
+
+            // 'avatar' => Image::make(__('Avatar'), 'avatar')
         ];
     }
 

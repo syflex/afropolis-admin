@@ -31,10 +31,14 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+
     protected $fillable = [
         'name',
+        'slug',
         'email',
-        'password',
+        'email_verified_at','password','phone','avatar','cover','about','website',
+        'skill','profession','status','birthday','active','activation_token',
+        'banned_untill','is_admin','last_login','country_id','city_id'
     ];
 
     /**

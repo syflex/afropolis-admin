@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\BelongsTo;
 
 class Collections extends Resource
@@ -56,9 +56,9 @@ class Collections extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Name'), 'name')->sortable(),
-            Text::make(__('Image'), 'image')->sortable(),
+            File::make(__('Image'), 'image_url')->disk('s3')->path('rooms/collections/'.$request->user()->id),
             Textarea::make(__('Description'), 'description')->sortable(),
-            BelongsTo::make(__('Video Room'), 'user', 'App\Nova\User'),
+            BelongsTo::make(__('User'), 'user', 'App\Nova\User'),
         ];
     }
 

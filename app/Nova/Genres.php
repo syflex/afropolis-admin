@@ -53,7 +53,8 @@ class Genres extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Name'), 'name')->sortable(),
-            File::make(__('Image'), 'image'),
+            File::make(__('Image'), 'image')
+            ->disk('s3')->path('genres'),
         ];
     }
 

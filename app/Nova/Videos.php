@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\BelongsTo;
 
 class Videos extends Resource
 {
@@ -51,15 +52,19 @@ class Videos extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
             Text::make(__('Title'), 'title')->sortable(),
             Text::make(__('Year'), 'year')->sortable(),
             File::make(__('Video'), 'video_url')
-                ->disk('s3')
-                ->path('rooms/video'.$request->user()->id),
-            File::make(__('Cover'), 'image_url')
-                ->disk('s3')
-                ->path('rooms/video'.$request->user()->id),
+                ->disk('s3')->disableDownload()
+                ->path('rooms/video/'.$request->user()->id),
+            File::make(__('Cover Image'), 'image_url')
+                ->disk('s3')->disableDownload()
+                ->path('rooms/video/'.$request->user()->id),
             Textarea::make(__('Description'), 'description')->sortable(),
+            BelongsTo::make('Users', 'User', 'App\Nova\User'),
+            BelongsTo::make('Category', 'Category', 'App\Nova\Category'),
+            BelongsTo::make('Interest', 'Interest', 'App\Nova\Interests'),
         ];
     }
 

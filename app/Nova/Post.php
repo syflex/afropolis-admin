@@ -52,13 +52,12 @@ class Post extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Title'), 'title'),
-            // File::make(__('Video'), 'video_url')
-            // ->disk('s3')
-            // ->path('rooms/video'.$request->user()->id),
-            // File::make(__('Cover'), 'cover')->disk('video'),
-            BelongsTo::make('Users', 'UserPost', 'App\Nova\User'),
+            // Text::make(__('Title'), 'title'),
+            File::make(__('Video'), 'video_url')->disk('s3')
+                    ->path('posts/'.$request->user()->id),
+            File::make(__('Image'), 'image_url')->disk('video'),
             Textarea::make(__('Description'), 'description'),
+            BelongsTo::make('Users', 'UserPost', 'App\Nova\User'),
         ];
     }
 
@@ -104,5 +103,20 @@ class Post extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return false;
     }
 }

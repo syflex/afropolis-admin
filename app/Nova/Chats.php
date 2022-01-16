@@ -3,8 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\DateTime;
 
 class Chats extends Resource
 {
@@ -13,7 +16,7 @@ class Chats extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Chats::class;
+    public static $model = \App\Models\Chat::class;
 
     /**
      * The logical group associated with the resource.
@@ -46,8 +49,13 @@ class Chats extends Resource
      */
     public function fields(Request $request)
     {
+        // 'user_id','message','receiver_id','read_at'
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            BelongsTo::make('User', 'User', 'App\Nova\User'),
+            Text::make(__('Message'), 'message')->sortable(),
+            BelongsTo::make(__('Receiver'), 'User', 'App\Nova\User')->sortable(),
+            DateTime::make(__('Read At'), 'read_at')->sortable(),
         ];
     }
 

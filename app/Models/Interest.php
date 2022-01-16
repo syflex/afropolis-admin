@@ -15,20 +15,19 @@ class Interest extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name','description','avatar','is_featured'
+        'name', 'description', 'avatar', 'is_featured'
     ];
 
     protected $table = 'interest';
 
 
-     public function videoCategory()
+    public function videoCategory()
     {
         return $this->hasMany(VideoCategory::class);
     }
 
-      public function videoInterest()
+    public function videoInterest()
     {
         return $this->hasMany(VideoInterest::class);
     }
-
 }

@@ -3,10 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\File;
 
 class Playlists extends Resource
 {
@@ -43,9 +45,11 @@ class Playlists extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            ID::make(__('Title'), 'title')->sortable(),
-            ID::make(__('Cover'), 'cover')->sortable(),
-            ID::make(__('Description'), 'description')->sortable(),
+            BelongsTo::make('Users', 'User', 'App\Nova\User'),
+            Text::make(__('Name'), 'name')->sortable(),
+            File::make(__('image_url'), 'image_url')->disk('s3')
+            ->path('playlists'),
+            Text::make(__('Description'), 'description')->sortable(),
         ];
     }
 

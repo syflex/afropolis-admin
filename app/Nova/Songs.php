@@ -50,13 +50,12 @@ class Songs extends Resource
      */
     public function fields(Request $request)
     {
-
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Title'),
-            Text::make('Year'),
-            File::make(__('Cover'), 'cover')->disk('audio'),
-            File::make(__('Song'), 'song')->disk('audio'),
+            Text::make('Name', 'name')->sortable(),
+            Text::make('Year', 'year')->sortable(),
+            File::make(__('Song Image'), 'image_url')->disk('s3')->path('rooms/sonic/'.$request->user()->id),
+            File::make(__('Song'), 'song_url')->disk('s3')->path('rooms/sonic/'.$request->user()->id),
             Textarea::make('Description'),
         ];
     }

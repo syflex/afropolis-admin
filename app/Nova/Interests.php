@@ -3,10 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\File;
 class Interests extends Resource
 {
     /**
@@ -52,6 +54,10 @@ class Interests extends Resource
             Text::make('name')
             ->sortable()
             ->rules('required', 'max:255'),
+            File::make(__('Avatar'), 'avatar')
+            ->disk('s3')
+            ->path('interests'),
+            Boolean::make('is_featured'),
             Textarea::make('description'),
         ];
     }
