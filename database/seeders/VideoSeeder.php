@@ -35,7 +35,7 @@ class VideoSeeder extends Seeder
         $post->save();
 
         $post = new Video;
-        $post->user_id = 2; //The official afropolis
+        $post->user_id = 1; //The official afropolis
         $post->category_id = 1;
         $post->interest_id = 1;
         $post->title = 'Crump Video!';
@@ -45,7 +45,7 @@ class VideoSeeder extends Seeder
         $post->save();
 
         $post = new Video;
-        $post->user_id = 2; //The official afropolis
+        $post->user_id = 6; //The official afropolis
         $post->category_id = 2;
         $post->interest_id = 1;
         $post->title = 'Song Video';
