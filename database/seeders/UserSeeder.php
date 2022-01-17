@@ -62,8 +62,8 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Oluwaseun Adebayo',
-            'slug' => 'osu',
+            'name' => 'Simon Moses',
+            'slug' => 'syflex',
             'email' => 'syflex360@gmail.com',
             'password' =>  Hash::make('Simon@360'),
             'is_admin' => true,

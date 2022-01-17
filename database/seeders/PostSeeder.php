@@ -33,7 +33,7 @@ class PostSeeder extends Seeder
         $post->save();
 
         $post = new Post;
-        $post->user_id = 2; //The official afropolis
+        $post->user_id = 1; //The official afropolis
         $post->category_id = 1;
         $post->interest_id = 1;
         // $post->title = 'Welcome to afropolis!';
@@ -42,7 +42,7 @@ class PostSeeder extends Seeder
         $post->save();
 
         $post = new Post;
-        $post->user_id = 2; //The official afropolis
+        $post->user_id = 6; //The official afropolis
         $post->category_id = 2;
         $post->interest_id = 1;
         // $post->title = 'Welcome to afropolis!';
