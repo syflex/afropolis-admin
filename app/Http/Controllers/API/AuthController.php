@@ -68,7 +68,7 @@ class AuthController extends Controller
         try {
             //code...
 
-            // Mail::to($user)->send(new WelcomeMail($user));
+            Mail::to($user)->send(new WelcomeMail($user));
 
             // $title = 'Signup Notification';
             // $body = 'Welcome to Afropolis ';

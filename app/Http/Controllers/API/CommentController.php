@@ -48,15 +48,15 @@ class CommentController extends Controller
         $inpute['user_id'] = Auth::user()->id;
         $comment = Comment::create($inpute);
 
-        // $user = User::where()
+        $user = Auth::user();
 
-        // $title ='New Comment';
-        // $body = 'Comment is '. ' ' .$request->content;
+        $title ='New Comment';
+        $body = 'Comment is '. ' ' .$request->content;
 
-        //    Mail::to($user)->send(new CommentMail($follow));
-        //     $title = 'comment Notification';
-        //     $body = 'New user is following You ';
-        //     $user->notify(new CommentNotification($user, $title, $body));
+        Mail::to($user)->send(new CommentMail($user));
+        // $title = 'Comment Notification';
+        // $body = 'New user is following You ';
+        // $user->notify(new CommentNotification($user, $title, $body));
 
         return response()->json([
             'status' => 'success',
