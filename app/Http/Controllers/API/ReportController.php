@@ -9,7 +9,7 @@ use App\Models\Report;
 class ReportController extends Controller
 {
     //save report
-    public function saveReport(Request $request)
+    public function report(Request $request)
     {
         $report = new Report();
         $report->resource_id = $request->resource_id;

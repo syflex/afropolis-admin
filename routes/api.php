@@ -278,6 +278,13 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/{id}', 'ViewController@show');
             });
 
+            // report route
+            Route::group(['prefix' => '/report'], function () {
+                 Route::post('/', 'ReportController@report');
+                //  Route::get('/', 'ReportController@index');
+                //  Route::get('/{id}', 'ReportController@show');
+                //  Route::delete('/{id}', 'ReportController@destroy');
+            });
 
         });
 
