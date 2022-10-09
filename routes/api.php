@@ -63,32 +63,32 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
 
                 // events
             Route::group(['prefix'=> '/events'], function () {
-                    Route::post('/create', 'EventController@store');
-                    Route::put('/{id}', 'EventController@update');
-                    Route::get('/', 'EventController@index');
-                    Route::get('/{id}', 'EventController@show');
-                    Route::get('/user/events', 'EventController@userEvents');
-                    Route::get('/user/events/{id}', 'EventController@getUserEventById');
-                    Route::delete('/{id}', 'EventController@destroy');
+                Route::post('/create', 'EventController@store');
+                Route::put('/{id}', 'EventController@update');
+                Route::get('/', 'EventController@index');
+                Route::get('/{id}', 'EventController@show');
+                Route::get('/user/events', 'EventController@userEvents');
+                Route::get('/user/events/{id}', 'EventController@getUserEventById');
+                Route::delete('/{id}', 'EventController@destroy');
             });
 
             Route::group(['prefix'=> '/posts'], function () {
-                    Route::post('/', 'PostController@store');
-                    Route::put('/{id}', 'PostController@update');
-                    Route::get('/all', 'PostController@index');
-                    Route::get('/user/post', 'PostController@userPosts');
-                    Route::get('/user/post/{id}', 'PostController@userPostsById');
-                    Route::get('/{id}', 'PostController@show');
-                    Route::delete('/{id}', 'PostController@destroy');
+                Route::post('/', 'PostController@store');
+                Route::put('/{id}', 'PostController@update');
+                Route::get('/all', 'PostController@index');
+                Route::get('/user/post', 'PostController@userPosts');
+                Route::get('/user/post/{id}', 'PostController@userPostsById');
+                Route::get('/{id}', 'PostController@show');
+                Route::delete('/{id}', 'PostController@destroy');
             });
 
             Route::group(['prefix' => '/interests'], function () {
-                    Route::post('/', 'InterestController@store');
-                    Route::put('/{id}', 'InterestController@update');
-                    Route::get('/', 'InterestController@index');
-                    Route::get('/{id}', 'InterestController@show');
-                    Route::delete('/{id}', 'InterestController@destroy');
-                    Route::get('/{interest_id}', 'InterestController@addRemoveUserInterest');
+                Route::post('/', 'InterestController@store');
+                Route::put('/{id}', 'InterestController@update');
+                Route::get('/', 'InterestController@index');
+                Route::get('/{id}', 'InterestController@show');
+                Route::delete('/{id}', 'InterestController@destroy');
+                Route::get('/{interest_id}', 'InterestController@addRemoveUserInterest');
             });
 
             Route::group(['prefix' => '/comments'], function () {
@@ -108,7 +108,7 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                 Route::delete('/{id}', 'CollectionController@destroy');
             });
 
-              Route::group(['prefix' => '/genre'], function () {
+            Route::group(['prefix' => '/genre'], function () {
                 Route::post('/', 'GenreController@store');
                 Route::get('/', 'GenreController@index');
                 Route::get('/{id}', 'GenreController@show');
@@ -207,11 +207,11 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             });
 
             Route::group(['prefix' => '/song_keyword'], function () {
-                 Route::post('/', 'SongKeywordController@store');
-                 Route::get('/', 'SongKeywordController@index');
-                 Route::get('/{id}', 'SongKeywordController@show');
-                 Route::delete('/{id}', 'SongKeywordController@destroy');
-                //  Route::put('/{id}', 'PlaylistSongController@update');
+                Route::post('/', 'SongKeywordController@store');
+                Route::get('/', 'SongKeywordController@index');
+                Route::get('/{id}', 'SongKeywordController@show');
+                Route::delete('/{id}', 'SongKeywordController@destroy');
+            //  Route::put('/{id}', 'PlaylistSongController@update');
             });
 
              Route::group(['prefix' => '/videos'], function () {
@@ -261,7 +261,6 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/', 'VideoKeywordController@index');
                  Route::get('/{id}', 'VideoKeywordController@show');
                  Route::delete('/{id}', 'VideoKeywordController@destroy');
-                //  Route::put('/{id}', 'VideoKeywordController@update');
             });
 
             Route::group(['prefix' => '/verified_users'], function () {
@@ -269,7 +268,6 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
                  Route::get('/', 'VerifiedUserController@index');
                  Route::get('/{id}', 'VerifiedUserController@show');
                  Route::delete('/{id}', 'VerifiedUserController@destroy');
-                //  Route::put('/{id}', 'VideoKeywordController@update');
             });
 
              Route::group(['prefix' => '/views'], function () {
@@ -281,9 +279,12 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             // report route
             Route::group(['prefix' => '/report'], function () {
                  Route::post('/', 'ReportController@report');
-                //  Route::get('/', 'ReportController@index');
-                //  Route::get('/{id}', 'ReportController@show');
-                //  Route::delete('/{id}', 'ReportController@destroy');
+            });
+
+            // block route
+            Route::group(function () {
+                Route::get('block', 'BlockController@blockUser');
+                Route::get('unblock', 'BlockController@unblockUser');
             });
 
         });
