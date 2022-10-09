@@ -282,8 +282,8 @@ Route::namespace('App\Http\Controllers\API')->group(function () {
             });
 
             // block route
-            Route::group(function () {
-                Route::get('block', 'BlockController@blockUser');
+            Route::group(['prefix' => '/block'], function () {
+                Route::get('/', 'BlockController@blockUser');
                 Route::get('unblock', 'BlockController@unblockUser');
             });
 
